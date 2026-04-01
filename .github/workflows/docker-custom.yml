@@ -53,3 +53,9 @@ jobs:
                   labels: ${{ steps.meta.outputs.labels }}
                   cache-from: type=gha,scope=docker-custom
                   cache-to: type=gha,mode=max,scope=docker-custom
+
+            - name: Trigger Coolify redeployment
+              run: |
+                  curl --silent --fail --show-error -X GET \
+                    -H "Authorization: Bearer ${{ secrets.COOLIFY_WEBHOOK_APITOKEN }}" \
+                    "${{ secrets.COOLIFY_WEBHOOK_URL }}"
