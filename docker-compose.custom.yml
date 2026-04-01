@@ -19,7 +19,7 @@ services:
             - redis
             - browserless
         labels:
-            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=cherish-unplug-lemonis:$2y$05$E971.LcolFSrZdGsOhf4AO54leSuaJhcmzyy9Q2YLSLH0.ZjsNue.
+            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=cherish-unplug-lemonis:$2y$05$8n/QTs2Ff56MdmbIwjsmgeiYv69ZU9HnG2bpXGZI44CwRwC8qDgH.
             - traefik.http.routers.http-0-hyprrykhpm87vx88mwnlwrkt-rsshub.middlewares=hyprrykhpm87vx88mwnlwrkt-rsshub
 
     real-browser:
