@@ -10,6 +10,7 @@ services:
             REDIS_URL: 'redis://redis:6379/'
             PUPPETEER_WS_ENDPOINT: 'ws://browserless:3000'
             PUPPETEER_REAL_BROWSER_SERVICE: 'http://real-browser:3000'
+            ACCESS_KEY: 'hLKGr9d69pt@cLU!'
         healthcheck:
             test: ['CMD', 'curl', '-f', 'http://localhost:1200/healthz']
             interval: 30s
@@ -18,9 +19,6 @@ services:
         depends_on:
             - redis
             - browserless
-        labels:
-            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=cherish-unplug-lemonis:$2y$05$ZtVswxkQPUkd9bIwHhXlbODkWKOxLsJY7t0rPD5CpQy.8p1fSR666
-            - traefik.http.routers.http-0-hyprrykhpm87vx88mwnlwrkt-rsshub.middlewares=hyprrykhpm87vx88mwnlwrkt-rsshub
 
     real-browser:
         image: ghcr.io/hyoban/puppeteer-real-browser-hono
