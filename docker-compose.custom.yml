@@ -12,7 +12,7 @@ services:
             PUPPETEER_REAL_BROWSER_SERVICE: 'http://real-browser:3000'
             ACCESS_KEY: 'hLKGr9d69pt@cLU!'
         healthcheck:
-            test: ['CMD', 'curl', '-f', 'http://localhost:1200/healthz']
+            test: ['CMD', 'curl', '-f', 'http://localhost:1200/healthz?key=hLKGr9d69pt@cLU!']
             interval: 30s
             timeout: 10s
             retries: 3
