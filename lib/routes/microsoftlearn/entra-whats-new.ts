@@ -30,7 +30,9 @@ export const route = {
             const text = $(el).text().trim();
 
             if (tagName === 'h2') {
-                currentMonth = text;
+                // Extract only "Month YYYY" from the heading text, ignoring any trailing anchor link characters
+                const match = text.match(/([A-Za-z]+ \d{4})/);
+                currentMonth = match ? match[1] : '';
                 return;
             }
 
@@ -66,7 +68,7 @@ export const route = {
                 link: currentUrl,
                 description,
                 guid: `${currentUrl}#${slug}`,
-                pubDate: currentMonth ? parseDate(currentMonth, ['MMMM YYYY', 'MMMM, YYYY']) : undefined,
+                pubDate: currentMonth ? parseDate(currentMonth, 'MMMM YYYY') : undefined,
             });
         });
 
