@@ -81978,33 +81978,6 @@ export default {
   },
   "microsoftlearn": {
     "routes": {
-      "/entra/release-notes": {
-        "path": "/entra/release-notes",
-        "name": "Microsoft Entra Release Notes",
-        "categories": [
-          "program-update"
-        ],
-        "example": "/microsoftlearn/entra/release-notes",
-        "maintainers": [],
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "learn.microsoft.com/en-us/entra/fundamentals/whats-new"
-            ],
-            "target": "/entra/release-notes"
-          }
-        ],
-        "location": "entra-release-notes.ts",
-        "module": () => import('@/routes/microsoftlearn/entra-release-notes.ts')
-      },
       "/entra/whats-new": {
         "path": "/entra/whats-new",
         "name": "Microsoft Entra releases and announcements",
