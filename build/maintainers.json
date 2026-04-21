@@ -331,13 +331,13 @@
   "/accessbriefing/:category{.+}?": [
     "nczitzk"
   ],
-  "/acfun/bangumi/:id": [
+  "/acfun/bangumi/:id/:embed?": [
     "xyqfer"
   ],
   "/acfun/article/:categoryId/:sortType?/:timeRange?": [
     "TonyRL"
   ],
-  "/acfun/user/video/:uid": [
+  "/acfun/user/video/:uid/:embed?": [
     "wdssmq"
   ],
   "/acg17/post/all": [
@@ -541,6 +541,9 @@
   ],
   "/amz123/kx": [
     "defp"
+  ],
+  "/android/pixel-update-bulletin": [
+    "TonyRL"
   ],
   "/android/platform-tools-releases": [
     "nczitzk"
@@ -1333,6 +1336,9 @@
   "/cahkms/:category?": [
     "nczitzk"
   ],
+  "/caicai/blog/:lang?": [
+    "TonyRL"
+  ],
   "/caijing/roll": [
     "TonyRL"
   ],
@@ -1416,6 +1422,12 @@
   "/cast/:column/:subColumn/:category?": [
     "KarasuShin",
     "TonyRL"
+  ],
+  "/castanet/:category?": [
+    "TonyRL"
+  ],
+  "/castbox/channel/:channel": [
+    "ananyatimalsina"
   ],
   "/catti/news/:category": [
     "PrinOrange"
@@ -3009,6 +3021,9 @@
   "/fastbull/news": [
     "nczitzk"
   ],
+  "/fcbayern/news/:language?": [
+    "TonyRL"
+  ],
   "/fda/cdrh/:titleOnly?": [],
   "/fediverse/timeline/:account": [
     "DIYgod",
@@ -4509,6 +4524,9 @@
   "/ianspriggs/:category?": [
     "nczitzk"
   ],
+  "/iapp/news": [
+    "TonyRL"
+  ],
   "/icac/news/:lang?": [
     "linbuxiao, TonyRL"
   ],
@@ -4770,6 +4788,9 @@
   ],
   "/j-test/news": [
     "kuhahku"
+  ],
+  "/jable/search/:query": [
+    "eve2ptp"
   ],
   "/jamesclear/book-summaries": [
     "Rjnishant530"
@@ -5648,6 +5669,9 @@
     "TonyRL"
   ],
   "/metmuseum/exhibitions/:state?": [],
+  "/mhlw/monthly-labour-survey": [
+    "TonyRL"
+  ],
   "/mi/golden": [
     "nczitzk"
   ],
@@ -5884,6 +5908,9 @@
   ],
   "/mysql/release/:version?": [
     "nczitzk"
+  ],
+  "/nanhua/report/:type1/:type2": [
+    "TonyRL"
   ],
   "/nankai/ai/:type?": [
     "LMark"
@@ -6766,6 +6793,9 @@
   "/perplexity/changelog": [
     "xbot"
   ],
+  "/peterwunder/achievements": [
+    "LinxHex"
+  ],
   "/phoronix/:category?/:topic?": [
     "oppliate",
     "Rongronggg9"
@@ -6927,6 +6957,27 @@
   "/podwise/explore/:type": [
     "lyling"
   ],
+  "/polymarket/event/:slug": [
+    "heqi201255"
+  ],
+  "/polymarket/events/:tagSlug?": [
+    "heqi201255"
+  ],
+  "/polymarket/leaderboard/:category?/:timePeriod?": [
+    "heqi201255"
+  ],
+  "/polymarket/positions/:address": [
+    "heqi201255"
+  ],
+  "/polymarket/search/:query": [
+    "heqi201255"
+  ],
+  "/polymarket/series/:slug?": [
+    "heqi201255"
+  ],
+  "/polymarket/user/:address": [
+    "heqi201255"
+  ],
   "/pornhub/category/:caty/:img?": [
     "nczitzk"
   ],
@@ -6962,6 +7013,9 @@
   "/producthunt/today": [
     "miaoyafeng",
     "Fatpandac"
+  ],
+  "/projectjav/actress/:id": [
+    "Exat1979"
   ],
   "/ps/monthly-games": [
     "justjustCC"
@@ -7366,7 +7420,7 @@
   "/ruc/hr/:category?": [
     "nczitzk"
   ],
-  "/runtrail/": [
+  "/runyeah/": [
     "TonyRL"
   ],
   "/rustcc/jobs": [
@@ -8533,6 +8587,9 @@
   "/thewirehindi/": [
     "Rjnishant530"
   ],
+  "/thinkingmachines/news": [
+    "w3nhao"
+  ],
   "/thoughtco/:category?": [
     "nczitzk"
   ],
@@ -8686,6 +8743,9 @@
   ],
   "/trendforce/news": [
     "nczitzk"
+  ],
+  "/trendforce/cn/presscenter/news": [
+    "TonyRL"
   ],
   "/trendingpapers/papers/:category?/:time?/:cited?": [
     "CookiePieWw"
@@ -9137,6 +9197,9 @@
   "/webcatalog/changelog": [
     "Tsuyumi25"
   ],
+  "/wechat/wechat2rss/:id": [
+    "TonyRL"
+  ],
   "/wechat/announce": [
     "xyqfer"
   ],
@@ -9165,9 +9228,6 @@
   ],
   "/wechat/uread/:userid": [
     "kt286"
-  ],
-  "/wechat/wechat2rss/:id": [
-    "TonyRL"
   ],
   "/weekendhk/": [
     "TonyRL"
@@ -9290,6 +9350,9 @@
   "/wizfile/updates": [
     "Fatpandac"
   ],
+  "/wkjyqh/research": [
+    "TonyRL"
+  ],
   "/wmc-bj/publish/:category{.+}?": [],
   "/wmpvp/news/:type": [
     "tssujt"
@@ -9379,6 +9442,9 @@
   ],
   "/xboxfan/news": [
     "XXY233"
+  ],
+  "/xhamster/:creators": [
+    "eve2ptp"
   ],
   "/xianbao/:category?": [
     "nashi23"

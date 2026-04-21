@@ -5894,15 +5894,16 @@ export default {
   },
   "acfun": {
     "routes": {
-      "/bangumi/:id": {
-        "path": "/bangumi/:id",
+      "/bangumi/:id/:embed?": {
+        "path": "/bangumi/:id/:embed?",
         "categories": [
           "anime"
         ],
         "view": 3,
-        "example": "/acfun/bangumi/5022158",
+        "example": "/acfun/bangumi/6000617",
         "parameters": {
-          "id": "番剧 id"
+          "id": "番剧 id",
+          "embed": "默认为开启内嵌视频, 任意值为关闭"
         },
         "features": {
           "requireConfig": false,
@@ -5916,7 +5917,7 @@ export default {
         "maintainers": [
           "xyqfer"
         ],
-        "description": "::: tip\n番剧 id 不包含开头的 aa。\n例如：`https://www.acfun.cn/bangumi/aa5022158` 的番剧 id 是 5022158，不包括开头的 aa。\n:::",
+        "description": "::: tip\n番剧 id 不包含开头的 aa。\n例如：`https://www.acfun.cn/bangumi/aa6000617` 的番剧 id 是 6000617，不包括开头的 aa。\n:::",
         "location": "bangumi.ts",
         "module": () => import('@/routes/acfun/bangumi.ts')
       },
@@ -6018,8 +6019,8 @@ export default {
         "location": "article.ts",
         "module": () => import('@/routes/acfun/article.ts')
       },
-      "/user/video/:uid": {
-        "path": "/user/video/:uid",
+      "/user/video/:uid/:embed?": {
+        "path": "/user/video/:uid/:embed?",
         "radar": [
           {
             "source": [
@@ -6030,7 +6031,8 @@ export default {
         ],
         "name": "用户投稿",
         "parameters": {
-          "uid": "用户 UID"
+          "uid": "用户 UID",
+          "embed": "默认为开启内嵌视频, 任意值为关闭"
         },
         "categories": [
           "anime"
@@ -9814,6 +9816,28 @@ export default {
   },
   "android": {
     "routes": {
+      "/pixel-update-bulletin": {
+        "path": "/pixel-update-bulletin",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/android/pixel-update-bulletin",
+        "radar": [
+          {
+            "source": [
+              "source.android.com/docs/security/bulletin/pixel",
+              "source.android.com"
+            ]
+          }
+        ],
+        "name": "Pixel Update Bulletins",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "source.android.com/docs/security/bulletin/pixel",
+        "location": "pixel-update-bulletin.ts",
+        "module": () => import('@/routes/android/pixel-update-bulletin.ts')
+      },
       "/platform-tools-releases": {
         "path": "/platform-tools-releases",
         "categories": [
@@ -12434,7 +12458,7 @@ export default {
       "/news/:lang?": {
         "path": "/news/:lang?",
         "categories": [
-          "other"
+          "sport"
         ],
         "example": "/atptour/news/en",
         "parameters": {
@@ -12458,6 +12482,9 @@ export default {
     "apiRoutes": {},
     "name": "ATP Tour",
     "url": "www.atptour.com",
+    "categories": [
+      "sport"
+    ],
     "description": "News from the official site of men's professional tennis.",
     "lang": "en"
   },
@@ -20603,6 +20630,62 @@ export default {
     "url": "cahkms.org",
     "lang": "zh-CN"
   },
+  "caicai": {
+    "routes": {
+      "/blog/:lang?": {
+        "path": "/blog/:lang?",
+        "categories": [
+          "blog"
+        ],
+        "example": "/caicai/blog",
+        "parameters": {
+          "lang": {
+            "description": "Language",
+            "options": [
+              {
+                "value": "en",
+                "label": "English"
+              },
+              {
+                "value": "zh",
+                "label": "中文"
+              }
+            ],
+            "default": "en"
+          }
+        },
+        "radar": [
+          {
+            "source": [
+              "www.caicai.me/blogs"
+            ]
+          },
+          {
+            "source": [
+              "www.caicai.me/zh/blogs"
+            ],
+            "target": "/blog/zh"
+          }
+        ],
+        "name": "Blog",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.caicai.me/blogs",
+        "location": "blog.ts",
+        "module": () => import('@/routes/caicai/blog.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "CaiCai",
+    "url": "www.caicai.me",
+    "categories": [
+      "blog"
+    ],
+    "zh": {
+      "name": "CaiCai 的博客"
+    }
+  },
   "caijing": {
     "routes": {
       "/roll": {
@@ -21619,6 +21702,159 @@ export default {
     "name": "中国科学技术协会",
     "url": "cast.org.cn",
     "lang": "zh-CN"
+  },
+  "castanet": {
+    "routes": {
+      "/:category?": {
+        "path": "/:category?",
+        "categories": [
+          "traditional-media"
+        ],
+        "example": "/castanet/Kelowna",
+        "parameters": {
+          "category": {
+            "options": [
+              {
+                "value": "Top Headlines",
+                "label": "Top Headlines"
+              },
+              {
+                "value": "Recent Headlines",
+                "label": "Recent Headlines"
+              },
+              {
+                "value": "Kelowna",
+                "label": "Kelowna"
+              },
+              {
+                "value": "West-Kelowna",
+                "label": "West-Kelowna"
+              },
+              {
+                "value": "Peachland",
+                "label": "Peachland"
+              },
+              {
+                "value": "Vernon",
+                "label": "Vernon"
+              },
+              {
+                "value": "Salmon-Arm",
+                "label": "Salmon-Arm"
+              },
+              {
+                "value": "Penticton",
+                "label": "Penticton"
+              },
+              {
+                "value": "Oliver-Osoyoos",
+                "label": "Oliver-Osoyoos"
+              },
+              {
+                "value": "Kamloops",
+                "label": "Kamloops"
+              },
+              {
+                "value": "Nelson",
+                "label": "Nelson"
+              },
+              {
+                "value": "BC",
+                "label": "BC"
+              },
+              {
+                "value": "Canada",
+                "label": "Canada"
+              },
+              {
+                "value": "World",
+                "label": "World"
+              },
+              {
+                "value": "Business",
+                "label": "Business"
+              },
+              {
+                "value": "Sports",
+                "label": "Sports"
+              },
+              {
+                "value": "ShowBiz",
+                "label": "ShowBiz"
+              }
+            ],
+            "description": "Category",
+            "default": "Recent Headlines"
+          }
+        },
+        "radar": [
+          {
+            "source": [
+              "www.castanet.net/news/:category/"
+            ],
+            "target": "/:category"
+          },
+          {
+            "source": [
+              "www.castanet.net/"
+            ],
+            "target": "/"
+          }
+        ],
+        "name": "News",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.castanet.net",
+        "location": "news.ts",
+        "module": () => import('@/routes/castanet/news.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Castanet",
+    "url": "www.castanet.net",
+    "lang": "en"
+  },
+  "castbox": {
+    "routes": {
+      "/channel/:channel": {
+        "path": "/channel/:channel",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/castbox/channel/Lemonade-Stand-id6776228",
+        "parameters": {
+          "channel": "Channel"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": true,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "castbox.fm/channel/:channel"
+            ],
+            "target": "/channel/:channel"
+          }
+        ],
+        "name": "Channels",
+        "description": "Get the channel from the Castbox channel URL. For example, the URL of the channel \"Lemonade Stand\" is `https://castbox.fm/channel/Lemonade-Stand-id6776228`, where `Lemonade-Stand-id6776228` is the `channel` parameter.\n    \n    You can use the RSSHub global `limit` query parameter to specify the maximum number of episodes to fetch from the Castbox API (defaults to 50). For example: `/castbox/channel/Lemonade-Stand-id6776228?limit=100`.",
+        "maintainers": [
+          "ananyatimalsina"
+        ],
+        "location": "channel.ts",
+        "module": () => import('@/routes/castbox/channel.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Castbox",
+    "url": "castbox.fm",
+    "description": "Castbox is a podcast distribution network and producer."
   },
   "catti": {
     "routes": {
@@ -32585,7 +32821,7 @@ export default {
         },
         "features": {
           "requireConfig": false,
-          "requirePuppeteer": false,
+          "requirePuppeteer": true,
           "antiCrawler": false,
           "supportBT": false,
           "supportPodcast": false,
@@ -32634,7 +32870,7 @@ export default {
         },
         "features": {
           "requireConfig": false,
-          "requirePuppeteer": false,
+          "requirePuppeteer": true,
           "antiCrawler": false,
           "supportBT": false,
           "supportPodcast": false,
@@ -36832,7 +37068,7 @@ export default {
       "/daily": {
         "path": "/daily",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/dongqiudi/daily",
         "radar": [
@@ -36854,7 +37090,7 @@ export default {
       "/result/:team": {
         "path": "/result/:team",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/dongqiudi/result/50001755",
         "parameters": {
@@ -36877,7 +37113,7 @@ export default {
       "/player_news/:id": {
         "path": "/player_news/:id",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/dongqiudi/player_news/50000339",
         "parameters": {
@@ -36900,7 +37136,7 @@ export default {
       "/special/:id": {
         "path": "/special/:id",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/dongqiudi/special/41",
         "parameters": {
@@ -36924,7 +37160,7 @@ export default {
       "/team_news/:team": {
         "path": "/team_news/:team",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/dongqiudi/team_news/50001755",
         "parameters": {
@@ -36947,7 +37183,7 @@ export default {
       "/top_news/:id?": {
         "path": "/top_news/:id?",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/dongqiudi/top_news/1",
         "parameters": {
@@ -36981,6 +37217,9 @@ export default {
     "apiRoutes": {},
     "name": "懂球帝",
     "url": "m.dongqiudi.com",
+    "categories": [
+      "sport"
+    ],
     "description": "::: tip\n-   可以通过头条新闻 + 参数过滤的形式获得早报、专题等内容。\n:::",
     "lang": "zh-CN"
   },
@@ -42489,7 +42728,13 @@ export default {
           "keyword": "Keyword, empty by default"
         },
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "FANTIA_COOKIE",
+              "optional": true,
+              "description": "The `cookie` after login can be obtained by viewing the request header in the console, If not filled in will cause some posts that require login to read to get exceptions"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -42516,7 +42761,13 @@ export default {
           "id": "User id, can be found in user profile URL"
         },
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "FANTIA_COOKIE",
+              "optional": true,
+              "description": "The `cookie` after login can be obtained by viewing the request header in the console, If not filled in will cause some posts that require login to read to get exceptions"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -42988,6 +43239,71 @@ export default {
     "apiRoutes": {},
     "name": "FastBull",
     "url": "fastbull.com",
+    "lang": "en"
+  },
+  "fcbayern": {
+    "routes": {
+      "/news/:language?": {
+        "path": "/news/:language?",
+        "categories": [
+          "sport"
+        ],
+        "example": "/fcbayern/news",
+        "parameters": {
+          "language": {
+            "description": "Language",
+            "options": [
+              {
+                "value": "en",
+                "label": "English"
+              },
+              {
+                "value": "es",
+                "label": "Español"
+              },
+              {
+                "value": "de",
+                "label": "Deutsch"
+              },
+              {
+                "value": "zh",
+                "label": "中文"
+              }
+            ],
+            "default": "en"
+          }
+        },
+        "radar": [
+          {
+            "source": [
+              "fcbayern.com/:language/news",
+              "fcbayern.com/:language"
+            ],
+            "target": "/news/:language"
+          },
+          {
+            "source": [
+              "www.fcbayern.cn/news",
+              "www.fcbayern.cn"
+            ],
+            "target": "/news/zh"
+          }
+        ],
+        "name": "News",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "fcbayern.com",
+        "location": "news.ts",
+        "module": () => import('@/routes/fcbayern/news.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "FC Bayern München",
+    "url": "fcbayern.com",
+    "categories": [
+      "sport"
+    ],
     "lang": "en"
   },
   "fda": {
@@ -45799,6 +46115,9 @@ export default {
       "/": {
         "path": "/",
         "example": "/gameapps",
+        "categories": [
+          "game"
+        ],
         "radar": [
           {
             "source": [
@@ -62892,6 +63211,35 @@ export default {
     "url": "ianspriggs.com",
     "lang": "en"
   },
+  "iapp": {
+    "routes": {
+      "/news": {
+        "path": "/news",
+        "categories": [
+          "new-media"
+        ],
+        "example": "/iapp/news",
+        "radar": [
+          {
+            "source": [
+              "iapp.org/news"
+            ]
+          }
+        ],
+        "name": "News",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "iapp.org/news",
+        "location": "news.ts",
+        "module": () => import('@/routes/iapp/news.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "IAPP",
+    "url": "iapp.org",
+    "lang": "en"
+  },
   "icac": {
     "routes": {
       "/news/:lang?": {
@@ -66485,6 +66833,47 @@ export default {
     "name": "实用日本语鉴定考试（J.TEST）",
     "url": "www.j-test.com",
     "lang": "ja"
+  },
+  "jable": {
+    "routes": {
+      "/search/:query": {
+        "path": "/search/:query",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/jable/search/みなみ羽琉",
+        "parameters": {
+          "query": "Search keyword"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "jable.tv/search/:query"
+            ],
+            "target": "/search/:query"
+          }
+        ],
+        "name": "Jable 搜索结果",
+        "maintainers": [
+          "eve2ptp"
+        ],
+        "location": "index.ts",
+        "module": () => import('@/routes/jable/index.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "jable",
+    "url": "jable.tv",
+    "lang": "zh"
   },
   "jamesclear": {
     "routes": {
@@ -74884,7 +75273,7 @@ export default {
       "/chrono": {
         "path": "/chrono",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/lephoceen/chrono",
         "parameters": {},
@@ -74915,6 +75304,9 @@ export default {
     "apiRoutes": {},
     "name": "Le Phocéen",
     "url": "lephoceen.fr",
+    "categories": [
+      "sport"
+    ],
     "description": "Actualités de l'Olympique de Marseille du site lephocéen.fr"
   },
   "letterboxd": {
@@ -81432,6 +81824,34 @@ export default {
     "url": "www.metmuseum.org",
     "lang": "en"
   },
+  "mhlw": {
+    "routes": {
+      "/monthly-labour-survey": {
+        "path": "/monthly-labour-survey",
+        "categories": [
+          "government"
+        ],
+        "example": "/mhlw/monthly-labour-survey",
+        "radar": [
+          {
+            "source": [
+              "www.mhlw.go.jp/toukei/list/30-1a.html"
+            ]
+          }
+        ],
+        "name": "毎月勤労統計調査 全国調査（月別結果）",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.mhlw.go.jp/toukei/list/30-1a.html",
+        "location": "monthly-labour-survey.ts",
+        "module": () => import('@/routes/mhlw/monthly-labour-survey.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "厚生労働省",
+    "url": "www.mhlw.go.jp"
+  },
   "mi": {
     "routes": {
       "/golden": {
@@ -84321,6 +84741,39 @@ export default {
     "name": "MySQL",
     "url": "dev.mysql.com",
     "lang": "en"
+  },
+  "nanhua": {
+    "routes": {
+      "/report/:type1/:type2": {
+        "path": "/report/:type1/:type2",
+        "categories": [
+          "finance"
+        ],
+        "example": "/nanhua/report/WEEK/WEEK_black",
+        "parameters": {
+          "type1": "一级分类代码，如 `WEEK`（周度报告）、`SEASON`（季年报告）、`HOT`（热点报告）等，需要使用 `encodeURIComponent` 编码",
+          "type2": "二级分类代码，如 `WEEK_black`（黑色）、`WEEK_enchem`（能化）等，需要使用 `encodeURIComponent` 编码"
+        },
+        "radar": [
+          {
+            "source": [
+              "mall.nanhua.net/mall/r/w/reportNew/report-list.html"
+            ]
+          }
+        ],
+        "name": "研报",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "mall.nanhua.net/mall/r/w/reportNew/report-list.html",
+        "location": "report.ts",
+        "module": () => import('@/routes/nanhua/report.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "南华期货",
+    "url": "mall.nanhua.net",
+    "lang": "zh-CN"
   },
   "nankai": {
     "routes": {
@@ -97259,6 +97712,50 @@ export default {
     "description": "Perplexity - AI-powered search and discovery engine",
     "lang": "en"
   },
+  "peterwunder": {
+    "routes": {
+      "/achievements": {
+        "path": "/achievements",
+        "categories": [
+          "other"
+        ],
+        "view": 2,
+        "example": "/peterwunder/achievements",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "projects.peterwunder.de/achievements"
+            ]
+          }
+        ],
+        "name": "New Badges",
+        "maintainers": [
+          "LinxHex"
+        ],
+        "description": "Latest badge pages from Peter Wunder's All Activity Challenges catalog. `pubDate` uses the first 'Visible in the app' date because the site does not expose a publication timestamp.",
+        "url": "projects.peterwunder.de/achievements",
+        "location": "achievements.ts",
+        "module": () => import('@/routes/peterwunder/achievements.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Peter Wunder",
+    "url": "projects.peterwunder.de",
+    "categories": [
+      "other"
+    ],
+    "description": "Projects and catalogs maintained by Peter Wunder.",
+    "lang": "en"
+  },
   "phoronix": {
     "routes": {
       "/:category?/:topic?": {
@@ -99308,6 +99805,225 @@ export default {
     },
     "lang": "en"
   },
+  "polymarket": {
+    "routes": {
+      "/event/:slug": {
+        "path": "/event/:slug",
+        "categories": [
+          "finance"
+        ],
+        "example": "/polymarket/event/presidential-election-winner-2024",
+        "parameters": {
+          "slug": "Event slug from the URL (e.g. presidential-election-winner-2024)"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "polymarket.com/event/:slug"
+            ],
+            "target": "/event/:slug"
+          }
+        ],
+        "name": "Event",
+        "url": "polymarket.com",
+        "maintainers": [
+          "heqi201255"
+        ],
+        "location": "event.ts",
+        "module": () => import('@/routes/polymarket/event.ts')
+      },
+      "/events/:tagSlug?": {
+        "path": "/events/:tagSlug?",
+        "categories": [
+          "finance"
+        ],
+        "example": "/polymarket/events",
+        "parameters": {
+          "tagSlug": "Tag slug to filter events, e.g. politics, sports, crypto. Omit for all events."
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "polymarket.com",
+              "polymarket.com/:tagSlug"
+            ],
+            "target": "/events/:tagSlug"
+          }
+        ],
+        "name": "Events",
+        "url": "polymarket.com",
+        "maintainers": [
+          "heqi201255"
+        ],
+        "location": "events.ts",
+        "module": () => import('@/routes/polymarket/events.ts')
+      },
+      "/leaderboard/:category?/:timePeriod?": {
+        "path": "/leaderboard/:category?/:timePeriod?",
+        "categories": [
+          "finance"
+        ],
+        "example": "/polymarket/leaderboard",
+        "parameters": {
+          "category": {
+            "description": "Market category: OVERALL, POLITICS, SPORTS, CRYPTO, CULTURE, MENTIONS, WEATHER, ECONOMICS, TECH, FINANCE",
+            "default": "OVERALL"
+          },
+          "timePeriod": {
+            "description": "Time period: DAY, WEEK, MONTH, ALL",
+            "default": "DAY"
+          }
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "Leaderboard",
+        "url": "polymarket.com",
+        "maintainers": [
+          "heqi201255"
+        ],
+        "location": "leaderboard.ts",
+        "module": () => import('@/routes/polymarket/leaderboard.ts')
+      },
+      "/positions/:address": {
+        "path": "/positions/:address",
+        "categories": [
+          "finance"
+        ],
+        "example": "/polymarket/positions/0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b",
+        "parameters": {
+          "address": "Wallet address (0x...)"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "User Positions",
+        "url": "polymarket.com",
+        "maintainers": [
+          "heqi201255"
+        ],
+        "location": "positions.ts",
+        "module": () => import('@/routes/polymarket/positions.ts')
+      },
+      "/search/:query": {
+        "path": "/search/:query",
+        "categories": [
+          "finance"
+        ],
+        "example": "/polymarket/search/trump",
+        "parameters": {
+          "query": "Search query"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "Search",
+        "url": "polymarket.com",
+        "maintainers": [
+          "heqi201255"
+        ],
+        "location": "search.ts",
+        "module": () => import('@/routes/polymarket/search.ts')
+      },
+      "/series/:slug?": {
+        "path": "/series/:slug?",
+        "categories": [
+          "finance"
+        ],
+        "example": "/polymarket/series",
+        "parameters": {
+          "slug": {
+            "description": "Series slug, e.g. nfl, nba, mlb. If omitted, lists all series.",
+            "default": "all"
+          }
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "polymarket.com/series/:slug"
+            ],
+            "target": "/series/:slug"
+          }
+        ],
+        "name": "Series",
+        "url": "polymarket.com",
+        "maintainers": [
+          "heqi201255"
+        ],
+        "location": "series.ts",
+        "module": () => import('@/routes/polymarket/series.ts')
+      },
+      "/user/:address": {
+        "path": "/user/:address",
+        "categories": [
+          "finance"
+        ],
+        "example": "/polymarket/user/0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b",
+        "parameters": {
+          "address": "Wallet address (0x...)"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "User Activity",
+        "url": "polymarket.com",
+        "maintainers": [
+          "heqi201255"
+        ],
+        "location": "user.ts",
+        "module": () => import('@/routes/polymarket/user.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Polymarket",
+    "url": "polymarket.com",
+    "description": "Polymarket is a prediction market platform where you can bet on real-world events.",
+    "lang": "en"
+  },
   "pornhub": {
     "routes": {
       "/category/:caty/:img?": {
@@ -100001,6 +100717,50 @@ export default {
     "name": "Product Hunt",
     "url": "www.producthunt.com",
     "description": "> 官方 Feed 地址为: [https://www.producthunt.com/feed](https://www.producthunt.com/feed)",
+    "lang": "en"
+  },
+  "projectjav": {
+    "routes": {
+      "/actress/:id": {
+        "path": "/actress/:id",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/projectjav/actress/rima-arai-22198",
+        "parameters": {
+          "id": "Actress ID or slug, can be found in the actress page URL"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "projectjav.com/actress/:id"
+            ],
+            "target": "/actress/:id"
+          }
+        ],
+        "name": "Actress",
+        "maintainers": [
+          "Exat1979"
+        ],
+        "url": "projectjav.com/",
+        "description": "Fetches the latest movies from a specific actress page on ProjectJAV.",
+        "location": "actress.ts",
+        "module": () => import('@/routes/projectjav/actress.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "ProjectJAV",
+    "url": "projectjav.com",
+    "description": "ProjectJAV provides adult video content information and streaming.",
     "lang": "en"
   },
   "ps": {
@@ -104365,30 +105125,36 @@ export default {
     },
     "lang": "zh-CN"
   },
-  "runtrail": {
+  "runyeah": {
     "routes": {
       "/": {
         "path": "/",
+        "example": "/runyeah",
         "radar": [
           {
             "source": [
-              "runtrail.cn/"
-            ],
-            "target": ""
+              "runyeah.world/"
+            ]
           }
         ],
-        "name": "Unknown",
+        "categories": [
+          "sport"
+        ],
+        "name": "最新文章",
         "maintainers": [
           "TonyRL"
         ],
-        "url": "runtrail.cn/",
+        "url": "runyeah.world/",
         "location": "posts.ts",
-        "module": () => import('@/routes/runtrail/posts.ts')
+        "module": () => import('@/routes/runyeah/posts.ts')
       }
     },
     "apiRoutes": {},
     "name": "跑野大爆炸",
-    "url": "runtrail.cn",
+    "url": "runyeah.world",
+    "categories": [
+      "sport"
+    ],
     "lang": "zh-CN"
   },
   "rustcc": {
@@ -109511,7 +110277,7 @@ export default {
         "path": "/sports/:type?",
         "name": "新浪体育",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/sports",
         "parameters": {
@@ -110492,7 +111258,7 @@ export default {
       "/news/:team": {
         "path": "/news/:team",
         "categories": [
-          "new-media"
+          "sport"
         ],
         "example": "/skysports/news/ac-milan",
         "parameters": {
@@ -110517,6 +111283,9 @@ export default {
     "apiRoutes": {},
     "name": "Sky Sports",
     "url": "skysports.com",
+    "categories": [
+      "sport"
+    ],
     "lang": "en"
   },
   "slashdot": {
@@ -121539,7 +122308,27 @@ export default {
         ],
         "example": "/thepaper/sidebar",
         "parameters": {
-          "sec": "侧边栏 id，可选 `hotNews` 即 澎湃热榜、`financialInformationNews` 即 澎湃财讯、`morningEveningNews` 即 早晚报，默认为 `hotNews`"
+          "sec": {
+            "description": "侧边栏 id",
+            "options": [
+              {
+                "label": "澎湃热榜",
+                "value": "hotNews"
+              },
+              {
+                "label": "澎湃快讯",
+                "value": "financialInformationNews"
+              },
+              {
+                "label": "早晚报",
+                "value": "morningEveningNews"
+              },
+              {
+                "label": "要闻精选",
+                "value": "editorHandpicked"
+              }
+            ]
+          }
         },
         "maintainers": [
           "bigfei"
@@ -121826,6 +122615,41 @@ export default {
     "name": "The Wire Hindi",
     "url": "thewirehindi.com",
     "lang": "hi"
+  },
+  "thinkingmachines": {
+    "routes": {
+      "/news": {
+        "path": "/news",
+        "name": "News",
+        "url": "thinkingmachines.ai/news",
+        "maintainers": [
+          "w3nhao"
+        ],
+        "example": "/thinkingmachines/news",
+        "categories": [
+          "programming"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false
+        },
+        "radar": [
+          {
+            "source": [
+              "thinkingmachines.ai/news",
+              "thinkingmachines.ai/news/"
+            ],
+            "target": "/news"
+          }
+        ],
+        "location": "news.ts",
+        "module": () => import('@/routes/thinkingmachines/news.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Thinking Machines Lab",
+    "url": "thinkingmachines.ai"
   },
   "thoughtco": {
     "routes": {
@@ -123857,6 +124681,27 @@ export default {
         "view": 0,
         "location": "new.ts",
         "module": () => import('@/routes/trendforce/new.ts')
+      },
+      "/cn/presscenter/news": {
+        "path": "/cn/presscenter/news",
+        "categories": [
+          "new-media"
+        ],
+        "example": "/trendforce/cn/presscenter/news",
+        "radar": [
+          {
+            "source": [
+              "www.trendforce.cn/presscenter/news"
+            ]
+          }
+        ],
+        "name": "产业洞察",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.trendforce.cn/presscenter/news",
+        "location": "news-cn.ts",
+        "module": () => import('@/routes/trendforce/news-cn.ts')
       }
     },
     "apiRoutes": {},
@@ -123866,7 +124711,11 @@ export default {
       "new-media"
     ],
     "description": "",
-    "lang": "en"
+    "lang": "en",
+    "zh": {
+      "name": "集邦咨询",
+      "url": "trendforce.cn"
+    }
   },
   "trendingpapers": {
     "routes": {
@@ -129741,6 +130590,30 @@ export default {
   },
   "wechat": {
     "routes": {
+      "/wechat2rss/:id": {
+        "path": "/wechat2rss/:id",
+        "categories": [
+          "new-media"
+        ],
+        "example": "/wechat/wechat2rss/5b925323244e9737c39285596c53e3a2f4a30774",
+        "parameters": {
+          "id": "公众号 id，打开 `https://wechat2rss.xlab.app/posts/list/`，在 URL 中找到 id；注意不是公众号页的 id，而是订阅的 id"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "公众号（Wechat2RSS 来源）",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "location": "wechat2rss.ts",
+        "module": () => import('@/routes/wechat/wechat2rss.ts')
+      },
       "/announce": {
         "path": "/announce",
         "categories": [
@@ -129973,30 +130846,6 @@ export default {
         ],
         "location": "uread.ts",
         "module": () => import('@/routes/wechat/uread.ts')
-      },
-      "/wechat2rss/:id": {
-        "path": "/wechat2rss/:id",
-        "categories": [
-          "new-media"
-        ],
-        "example": "/wechat/wechat2rss/5b925323244e9737c39285596c53e3a2f4a30774",
-        "parameters": {
-          "id": "公众号 id，打开 `https://wechat2rss.xlab.app/posts/list/`，在 URL 中找到 id；注意不是公众号页的 id，而是订阅的 id"
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "name": "公众号（Wechat2RSS 来源）",
-        "maintainers": [
-          "TonyRL"
-        ],
-        "location": "wechat2rss.ts",
-        "module": () => import('@/routes/wechat/wechat2rss.ts')
       }
     },
     "apiRoutes": {},
@@ -130515,7 +131364,7 @@ export default {
       "/news": {
         "path": "/news",
         "categories": [
-          "other"
+          "sport"
         ],
         "example": "/wfdf/news",
         "parameters": {},
@@ -130547,6 +131396,9 @@ export default {
     "apiRoutes": {},
     "name": "WFDF",
     "url": "wfdf.sport",
+    "categories": [
+      "sport"
+    ],
     "lang": "en"
   },
   "wfu": {
@@ -131294,6 +132146,39 @@ export default {
     "name": "WziFile",
     "url": "antibody-software.com",
     "lang": "en"
+  },
+  "wkjyqh": {
+    "routes": {
+      "/research": {
+        "path": "/research",
+        "categories": [
+          "finance"
+        ],
+        "example": "/wkjyqh/research",
+        "radar": [
+          {
+            "source": [
+              "www.wkjyqh.com/main/research_center/yjbg/index.shtml",
+              "www.wkjyqh.com/main/research_center/"
+            ]
+          }
+        ],
+        "name": "研究报告",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.wkjyqh.com/main/research_center/yjbg/index.shtml",
+        "location": "research.ts",
+        "module": () => import('@/routes/wkjyqh/research.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "五矿期货",
+    "url": "www.wkjyqh.com",
+    "categories": [
+      "finance"
+    ],
+    "lang": "zh-CN"
   },
   "wmc-bj": {
     "routes": {
@@ -132262,6 +133147,49 @@ export default {
     "name": "盒心光环",
     "url": "xboxfan.com",
     "lang": "zh-CN"
+  },
+  "xhamster": {
+    "routes": {
+      "/:creators": {
+        "path": "/:creators",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/xhamster/faustina-pierre",
+        "parameters": {
+          "creators": "Creator slug from the URL (e.g. `faustina-pierre`)"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "xhamster.com/creators/:creators",
+              "xhamster.com/creators/:creators/newest"
+            ],
+            "target": "/:creators"
+          }
+        ],
+        "name": "Newest Videos by Creator",
+        "maintainers": [
+          "eve2ptp"
+        ],
+        "url": "xhamster.com/faustina-pierre/newest",
+        "location": "index.ts",
+        "module": () => import('@/routes/xhamster/index.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "xHamster",
+    "url": "xhamster.com",
+    "lang": "en"
   },
   "xianbao": {
     "routes": {
@@ -138894,7 +139822,7 @@ export default {
       "/novel/:type": {
         "path": "/novel/:type",
         "name": "小说列表",
-        "url": "zxcs.info",
+        "url": "zxcs.click",
         "maintainers": [
           "liaochuan"
         ],
@@ -138917,7 +139845,7 @@ export default {
         "radar": [
           {
             "source": [
-              "zxcs.info/:type"
+              "zxcs.click/:type"
             ],
             "target": "/novel/:type"
           }
@@ -138928,7 +139856,7 @@ export default {
     },
     "apiRoutes": {},
     "name": "知轩藏书",
-    "url": "zxcs.info",
+    "url": "zxcs.click",
     "lang": "zh-CN"
   },
   "zyshow": {
