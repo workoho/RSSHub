@@ -1865,7 +1865,9 @@ export type RoutePath =
   | `/mi/golden`
   | `/microsoft/edge/addon/:crxid`
   | `/microsoft/mcr/product/*`
+  | `/microsoftlearn/entra/release-notes`
   | `/microsoftlearn/entra/whats-new`
+  | `/microsoftlearn/intune/whats-new`
   | `/mihoyo/bbs/follow-list/:uid`
   | `/mihoyo/bbs/img-ranking/:game/:routeParams?`
   | `/mihoyo/bbs/official/:gids/:type?/:page_size?/:last_id?`

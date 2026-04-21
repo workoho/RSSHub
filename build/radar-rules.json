@@ -32228,6 +32228,16 @@
         ],
         "target": "/microsoft/edge/addon/:crxid"
       }
+    ],
+    "learn": [
+      {
+        "title": "Microsoft Entra Release Notes",
+        "docs": "https://docs.rsshub.app/routes/program-update",
+        "source": [
+          "/en-us/entra/fundamentals/whats-new"
+        ],
+        "target": "/microsoftlearn/entra/release-notes"
+      }
     ]
   },
   "mihoyo.com": {

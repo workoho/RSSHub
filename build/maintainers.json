@@ -5686,9 +5686,11 @@
   "/microsoft/mcr/product/*": [
     "margani"
   ],
+  "/microsoftlearn/entra/release-notes": [],
   "/microsoftlearn/entra/whats-new": [
     "dein-github-name"
   ],
+  "/microsoftlearn/intune/whats-new": [],
   "/mihoyo/sr/:location?/:category?": [
     "shinanory"
   ],
