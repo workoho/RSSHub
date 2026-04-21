@@ -15,4 +15,4 @@ jobs:
             - name: Sync fork via GitHub API
               run: gh repo sync workoho/RSSHub --source DIYgod/RSSHub --branch master
               env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
