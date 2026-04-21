@@ -1,6 +1,7 @@
 import { load } from 'cheerio';
 
 import got from '@/utils/got';
+import { parseDate } from '@/utils/parse-date';
 
 export const route = {
     path: '/entra/whats-new',
@@ -19,6 +20,7 @@ export const route = {
             link: string;
             description: string;
             guid: string;
+            pubDate?: Date;
         }> = [];
 
         let currentMonth = '';
@@ -64,6 +66,7 @@ export const route = {
                 link: currentUrl,
                 description,
                 guid: `${currentUrl}#${slug}`,
+                pubDate: currentMonth ? parseDate(currentMonth, ['MMMM YYYY', 'MMMM, YYYY']) : undefined,
             });
         });
 
