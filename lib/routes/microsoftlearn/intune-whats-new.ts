@@ -16,13 +16,7 @@ export const route: Route = {
         const response = await got(currentUrl);
         const $ = load(response.data);
 
-        const item: Array<{
-            title: string;
-            link: string;
-            description: string;
-            guid: string;
-            pubDate?: Date;
-        }> = [];
+        const item: Array<{ title: string; link: string; description: string; pubDate?: Date }> = [];
 
         let currentWeek = '';
         let currentSection = '';
@@ -73,13 +67,14 @@ export const route: Route = {
 
             const sectionTitle = currentSection ? `${currentSection}: ${text}` : text;
             const description = blocks.join('\n\n');
+            const anchor = $(el).attr('id');
             const slug = `${encodeURIComponent(currentWeek.toLowerCase())}-${encodeURIComponent(sectionTitle.toLowerCase())}`;
+            const link = anchor ? `${currentUrl}#${anchor}` : `${currentUrl}#${slug}`;
 
             item.push({
                 title: sectionTitle,
-                link: currentUrl,
+                link,
                 description,
-                guid: `${currentUrl}#${slug}`,
                 pubDate: parseDate(currentWeek, 'MMMM D, YYYY'),
             });
         });
