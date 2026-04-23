@@ -81978,6 +81978,25 @@ export default {
   },
   "microsoftlearn": {
     "routes": {
+      "/intune/blog": {
+        "path": "/intune/blog",
+        "name": "Microsoft Intune Blog",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/microsoftlearn/intune/blog",
+        "maintainers": [],
+        "radar": [
+          {
+            "source": [
+              "techcommunity.microsoft.com/category/microsoftintune/blog/microsoftintuneblog"
+            ],
+            "target": "/intune/blog"
+          }
+        ],
+        "location": "intune-blog.ts",
+        "module": () => import('@/routes/microsoftlearn/intune-blog.ts')
+      },
       "/entra/whats-new": {
         "path": "/entra/whats-new",
         "name": "Microsoft Entra releases and announcements",

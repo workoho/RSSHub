@@ -5686,6 +5686,7 @@
   "/microsoft/mcr/product/*": [
     "margani"
   ],
+  "/microsoftlearn/intune/blog": [],
   "/microsoftlearn/entra/whats-new": [
     "dein-github-name"
   ],

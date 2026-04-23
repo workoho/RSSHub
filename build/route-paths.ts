@@ -1866,6 +1866,7 @@ export type RoutePath =
   | `/microsoft/edge/addon/:crxid`
   | `/microsoft/mcr/product/*`
   | `/microsoftlearn/entra/whats-new`
+  | `/microsoftlearn/intune/blog`
   | `/microsoftlearn/intune/in-development`
   | `/microsoftlearn/intune/whats-new`
   | `/mihoyo/bbs/follow-list/:uid`

@@ -32228,6 +32228,16 @@
         ],
         "target": "/microsoft/edge/addon/:crxid"
       }
+    ],
+    "techcommunity": [
+      {
+        "title": "Microsoft Intune Blog",
+        "docs": "https://docs.rsshub.app/routes/program-update",
+        "source": [
+          "/category/microsoftintune/blog/microsoftintuneblog"
+        ],
+        "target": "/microsoftlearn/intune/blog"
+      }
     ]
   },
   "mihoyo.com": {
