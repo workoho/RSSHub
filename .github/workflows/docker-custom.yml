@@ -58,4 +58,4 @@ jobs:
               run: |
                   curl --silent --fail --show-error -X GET \
                     -H "Authorization: Bearer ${{ secrets.COOLIFY_WEBHOOK_APITOKEN }}" \
-                    "${{ secrets.COOLIFY_WEBHOOK_URL }}"
+                    "${{ secrets.COOLIFY_WEBHOOK_URL }}?force=true"
