@@ -81992,6 +81992,17 @@ export default {
         "location": "entra-whats-new.ts",
         "module": () => import('@/routes/microsoftlearn/entra-whats-new.ts')
       },
+      "/intune/in-development": {
+        "path": "/intune/in-development",
+        "name": "In development for Microsoft Intune",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/microsoftlearn/intune/in-development",
+        "maintainers": [],
+        "location": "intune-in-development.ts",
+        "module": () => import('@/routes/microsoftlearn/intune-in-development.ts')
+      },
       "/intune/whats-new": {
         "path": "/intune/whats-new",
         "name": "What's new in Microsoft Intune",
