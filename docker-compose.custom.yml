@@ -18,6 +18,9 @@ services:
         depends_on:
             - redis
             - browserless
+        labels:
+            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=cherish-unplug-lemonis:$2y$05$ZtVswxkQPUkd9bIwHhXlbODkWKOxLsJY7t0rPD5CpQy.8p1fSR666
+            - traefik.http.routers.http-0-hyprrykhpm87vx88mwnlwrkt-rsshub.middlewares=hyprrykhpm87vx88mwnlwrkt-rsshub
 
     real-browser:
         image: ghcr.io/hyoban/puppeteer-real-browser-hono
