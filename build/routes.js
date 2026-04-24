@@ -10841,6 +10841,64 @@ export default {
   },
   "apple": {
     "routes": {
+      "/apps/update/:country/:id/:platform?": {
+        "path": "/apps/update/:country/:id/:platform?",
+        "categories": [
+          "program-update"
+        ],
+        "view": 5,
+        "example": "/apple/apps/update/us/id408709785",
+        "parameters": {
+          "country": "App Store Country, obtain from the app URL, see below",
+          "id": "App id, obtain from the app URL",
+          "platform": {
+            "description": "App Platform, see below, all by default",
+            "options": [
+              {
+                "value": "All",
+                "label": "all"
+              },
+              {
+                "value": "iOS",
+                "label": "iOS"
+              },
+              {
+                "value": "macOS",
+                "label": "macOS"
+              },
+              {
+                "value": "tvOS",
+                "label": "tvOS"
+              }
+            ]
+          }
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "apps.apple.com/:country/app/:appSlug/:id",
+              "apps.apple.com/:country/app/:id"
+            ],
+            "target": "/apps/update/:country/:id"
+          }
+        ],
+        "name": "App Update",
+        "maintainers": [
+          "EkkoG",
+          "nczitzk"
+        ],
+        "description": "\n::: tip\n  For example, the URL of [GarageBand](https://apps.apple.com/us/app/garageband/id408709785) in the App Store is `https://apps.apple.com/us/app/garageband/id408709785`. In this case, the `App Store Country` parameter for the route is `us`, and the `App id` parameter is `id408709785`. So the route should be [`/apple/apps/update/us/id408709785`](https://rsshub.app/apple/apps/update/us/id408709785).\n:::",
+        "location": "apps.ts",
+        "module": () => import('@/routes/apple/apps.ts')
+      },
       "/design": {
         "categories": [
           "design"
@@ -11018,64 +11076,6 @@ export default {
         },
         "location": "security-releases.ts",
         "module": () => import('@/routes/apple/security-releases.ts')
-      },
-      "/apps/update/:country/:id/:platform?": {
-        "path": "/apps/update/:country/:id/:platform?",
-        "categories": [
-          "program-update"
-        ],
-        "view": 5,
-        "example": "/apple/apps/update/us/id408709785",
-        "parameters": {
-          "country": "App Store Country, obtain from the app URL, see below",
-          "id": "App id, obtain from the app URL",
-          "platform": {
-            "description": "App Platform, see below, all by default",
-            "options": [
-              {
-                "value": "All",
-                "label": "all"
-              },
-              {
-                "value": "iOS",
-                "label": "iOS"
-              },
-              {
-                "value": "macOS",
-                "label": "macOS"
-              },
-              {
-                "value": "tvOS",
-                "label": "tvOS"
-              }
-            ]
-          }
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "apps.apple.com/:country/app/:appSlug/:id",
-              "apps.apple.com/:country/app/:id"
-            ],
-            "target": "/apps/update/:country/:id"
-          }
-        ],
-        "name": "App Update",
-        "maintainers": [
-          "EkkoG",
-          "nczitzk"
-        ],
-        "description": "\n::: tip\n  For example, the URL of [GarageBand](https://apps.apple.com/us/app/garageband/id408709785) in the App Store is `https://apps.apple.com/us/app/garageband/id408709785`. In this case, the `App Store Country` parameter for the route is `us`, and the `App id` parameter is `id408709785`. So the route should be [`/apple/apps/update/us/id408709785`](https://rsshub.app/apple/apps/update/us/id408709785).\n:::",
-        "location": "apps.ts",
-        "module": () => import('@/routes/apple/apps.ts')
       }
     },
     "apiRoutes": {},
@@ -137336,9 +137336,15 @@ export default {
         "parameters": {
           "id": "漫画ID"
         },
-        "example": "/zaimanhua/comic/14488",
+        "example": "/zaimanhua/comic/57069",
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "ZAIMANHUA_TOKEN",
+              "optional": true,
+              "description": "用户登录后，可以从浏览器开发者工具 Network 面板中的请求信息中获取 token，使用请求中的 `Authorization` 的值，完整设置为 `Bearer <token>`，或直接设置 token 并由路由自动补齐 `Bearer ` 前缀。"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -137359,6 +137365,7 @@ export default {
         "maintainers": [
           "kjasn"
         ],
+        "description": "::: Warning\n未登录用户无法获取到所有漫画，需要设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。\n:::",
         "location": "comic.ts",
         "module": () => import('@/routes/zaimanhua/comic.ts')
       },
@@ -137369,7 +137376,13 @@ export default {
         ],
         "example": "/zaimanhua/update",
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "ZAIMANHUA_TOKEN",
+              "optional": true,
+              "description": "可从浏览器开发者工具中抓取站点请求头 `Authorization` 的 Bearer token，并配置为环境变量。可设置为完整值 `Bearer <token>`，或仅设置 token 由路由自动补齐 `Bearer ` 前缀。"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -137389,6 +137402,7 @@ export default {
         "maintainers": [
           "kjasn"
         ],
+        "description": "::: Warning\n建议设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。\n:::",
         "location": "update.ts",
         "module": () => import('@/routes/zaimanhua/update.ts')
       }
