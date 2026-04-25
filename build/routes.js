@@ -137365,7 +137365,7 @@ export default {
         "maintainers": [
           "kjasn"
         ],
-        "description": "::: Warning\n未登录用户无法获取到所有漫画，需要设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。\n:::",
+        "description": "::: Warning\n未登录用户无法获取到所有漫画，需要设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。\n且由于源网站本身的限制，建议尽量在部署于中国大陆网络内的 RSSHub 节点中使用本路由。若在海外网络环境中使用，即使设置了`ZAIMANHUA_TOKEN`环境变量，也可能无法获取全部漫画。\n:::",
         "location": "comic.ts",
         "module": () => import('@/routes/zaimanhua/comic.ts')
       },
@@ -137402,7 +137402,7 @@ export default {
         "maintainers": [
           "kjasn"
         ],
-        "description": "::: Warning\n建议设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。\n:::",
+        "description": "::: Warning\n建议设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。且由于源网站本身的限制，建议尽量在部署于中国大陆网络内的 RSSHub 节点中使用本路由。若在海外网络环境中使用，即使设置了`ZAIMANHUA_TOKEN`环境变量，也可能无法获取全部漫画。\n:::",
         "location": "update.ts",
         "module": () => import('@/routes/zaimanhua/update.ts')
       }
