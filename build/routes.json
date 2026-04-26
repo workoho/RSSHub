@@ -61078,6 +61078,39 @@
   },
   "huggingface": {
     "routes": {
+      "/activity/:user/likes": {
+        "path": "/activity/:user/likes",
+        "categories": [
+          "programming"
+        ],
+        "example": "/huggingface/activity/dotwee/likes",
+        "parameters": {
+          "user": "Hugging Face username"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "huggingface.co/:user/activity/likes"
+            ],
+            "target": "/activity/:user/likes"
+          }
+        ],
+        "name": "User Likes Activity",
+        "maintainers": [
+          "dotwee"
+        ],
+        "url": "huggingface.co",
+        "location": "user-likes.ts",
+        "module": "() => import('@/routes/huggingface/user-likes.ts')"
+      },
       "/blog-community/:sort?": {
         "path": "/blog-community/:sort?",
         "categories": [
