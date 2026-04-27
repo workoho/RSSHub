@@ -82069,7 +82069,8 @@
     },
     "apiRoutes": {},
     "name": "Microsoft Learn",
-    "url": "learn.microsoft.com"
+    "url": "learn.microsoft.com",
+    "description": "Microsoft Learn documentation and product updates."
   },
   "mihoyo": {
     "routes": {
