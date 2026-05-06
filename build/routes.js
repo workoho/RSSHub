@@ -44037,6 +44037,44 @@ export default {
     "url": "flashcat.cloud",
     "lang": "zh-CN"
   },
+  "flexopus": {
+    "routes": {
+      "/changelog": {
+        "path": "/changelog",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/flexopus/changelog",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "help.flexopus.com/en/changelog/"
+            ],
+            "target": "/changelog"
+          }
+        ],
+        "name": "Changelog",
+        "maintainers": [
+          "Gl4dr3x"
+        ],
+        "url": "help.flexopus.com/en/changelog",
+        "location": "changelog.ts",
+        "module": () => import('@/routes/flexopus/changelog.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Flexopus",
+    "url": "help.flexopus.com"
+  },
   "flyert": {
     "routes": {
       "/creditcard/:bank": {

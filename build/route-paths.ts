@@ -1006,6 +1006,7 @@ export type RoutePath =
   | `/fishshell/`
   | `/fjksbm/:category?`
   | `/flashcat/blog`
+  | `/flexopus/changelog`
   | `/flyert/creditcard/:bank`
   | `/flyert/forum/:params{.+}?`
   | `/flyert/preferential`

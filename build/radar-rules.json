@@ -17107,6 +17107,19 @@
       }
     ]
   },
+  "flexopus.com": {
+    "_name": "Flexopus",
+    "help": [
+      {
+        "title": "Changelog",
+        "docs": "https://docs.rsshub.app/routes/program-update",
+        "source": [
+          "/en/changelog/"
+        ],
+        "target": "/flexopus/changelog"
+      }
+    ]
+  },
   "flyert.com.cn": {
     "_name": "飞客茶馆",
     ".": [
