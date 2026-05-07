@@ -4527,6 +4527,9 @@
   "/hypergryph/arknights/news/:group?": [
     "Astrian"
   ],
+  "/hypergryph/endfield/news/:group?": [
+    "E-larex"
+  ],
   "/i-cable/news/:category?": [
     "quiniapiezoelectricity"
   ],
