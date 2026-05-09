@@ -45151,7 +45151,7 @@
         "title": "快讯",
         "docs": "https://docs.rsshub.app/routes/finance",
         "source": [
-          "/newsletter/index.html"
+          "/zh-CN/newsletter"
         ],
         "target": "/techflowpost/express"
       },
@@ -45159,7 +45159,7 @@
         "title": "精选",
         "docs": "https://docs.rsshub.app/routes/finance",
         "source": [
-          "/article/index.html"
+          "/zh-CN/article"
         ],
         "target": "/techflowpost/featured/:category?"
       },
@@ -45167,7 +45167,7 @@
         "title": "首页",
         "docs": "https://docs.rsshub.app/routes/finance",
         "source": [
-          "/"
+          "/zh-CN"
         ],
         "target": "/techflowpost/"
       }
