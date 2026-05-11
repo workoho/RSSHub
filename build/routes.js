@@ -92110,7 +92110,8 @@ export default {
         "maintainers": [
           "Lava-Swimmer",
           "noname1776",
-          "camera-2018"
+          "camera-2018",
+          "Q16KBreak"
         ],
         "location": "main.ts",
         "module": () => import('@/routes/nyaa/main.ts')
@@ -92143,7 +92144,8 @@ export default {
         "maintainers": [
           "Lava-Swimmer",
           "noname1776",
-          "camera-2018"
+          "camera-2018",
+          "Q16KBreak"
         ],
         "location": "main.ts",
         "module": () => import('@/routes/nyaa/main.ts')
@@ -92176,7 +92178,8 @@ export default {
         "maintainers": [
           "Lava-Swimmer",
           "noname1776",
-          "camera-2018"
+          "camera-2018",
+          "Q16KBreak"
         ],
         "location": "main.ts",
         "module": () => import('@/routes/nyaa/main.ts')
@@ -92209,7 +92212,8 @@ export default {
         "maintainers": [
           "Lava-Swimmer",
           "noname1776",
-          "camera-2018"
+          "camera-2018",
+          "Q16KBreak"
         ],
         "location": "main.ts",
         "module": () => import('@/routes/nyaa/main.ts')
@@ -92242,7 +92246,8 @@ export default {
         "maintainers": [
           "Lava-Swimmer",
           "noname1776",
-          "camera-2018"
+          "camera-2018",
+          "Q16KBreak"
         ],
         "location": "main.ts",
         "module": () => import('@/routes/nyaa/main.ts')
@@ -92275,7 +92280,8 @@ export default {
         "maintainers": [
           "Lava-Swimmer",
           "noname1776",
-          "camera-2018"
+          "camera-2018",
+          "Q16KBreak"
         ],
         "location": "main.ts",
         "module": () => import('@/routes/nyaa/main.ts')
@@ -92284,7 +92290,7 @@ export default {
     "apiRoutes": {},
     "name": "Nyaa",
     "url": "nyaa.si",
-    "description": "::: tip\nThe 'Nyaa' includes several routes to access different parts of the site:\n\n1. `/nyaa/search/:query?` - Use this route to search for content with a specific query. For example, `/nyaa/search/bocchi` to search for bocchi related content.\n2. `/nyaa/user/:username?` - Access a user's profile by their username, e.g., `/nyaa/user/ANiTorrent`.\n3. `/nyaa/user/:username/search/:query?` - Search within a specific user's submissions using a query, e.g., `/nyaa/user/ANiTorrent/search/bocchi`.\n4. `/nyaa/sukebei/search/:query?` - This route is for searching adult content with a specific query, e.g., `/nyaa/sukebei/search/hentai`.\n5. `/nyaa/sukebei/user/:username?` - Access an adult content user's profile, e.g., `/nyaa/sukebei/user/milannews`.\n6. `/nyaa/sukebei/user/:username/search/:query?` - Search within a specific user's adult content submissions, e.g., `/nyaa/sukebei/user/milannews/search/hentai`.\n\n:::",
+    "description": "::: tip\nThe 'Nyaa' includes several routes to access different parts of the site:\n\n1. `/nyaa/search/:query?` - Use this route to search for content with a specific query. For example, `/nyaa/search/bocchi` to search for bocchi related content.\n2. `/nyaa/user/:username?` - Access a user's profile by their username, e.g., `/nyaa/user/ANiTorrent`.\n3. `/nyaa/user/:username/search/:query?` - Search within a specific user's submissions using a query, e.g., `/nyaa/user/ANiTorrent/search/bocchi`.\n4. `/nyaa/sukebei/search/:query?` - This route is for searching adult content with a specific query, e.g., `/nyaa/sukebei/search/hentai`.\n5. `/nyaa/sukebei/user/:username?` - Access an adult content user's profile, e.g., `/nyaa/sukebei/user/milannews`.\n6. `/nyaa/sukebei/user/:username/search/:query?` - Search within a specific user's adult content submissions, e.g., `/nyaa/sukebei/user/milannews/search/hentai`.\n7. Append the query string `?mode=fulltext` to any URL to retrieve detailed descriptions. By default, it returns `6` entries, but this can be adjusted using the `limit` query string, e.g., `/nyaa/user/VCB-Studio?mode=fulltext&limit=10`.\n\n:::",
     "lang": "en"
   },
   "nyc": {
