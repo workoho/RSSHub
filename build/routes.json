@@ -48487,6 +48487,46 @@
     "url": "sunborngame.com",
     "lang": "zh-CN"
   },
+  "gigazine": {
+    "routes": {
+      "/en": {
+        "path": "/en",
+        "categories": [
+          "new-media"
+        ],
+        "view": 0,
+        "example": "/gigazine/en",
+        "name": "English News",
+        "url": "gigazine.net/gsc_news/en/",
+        "maintainers": [
+          "chansantheman"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "gigazine.net/gsc_news/en/",
+              "gigazine.net/gsc_news/en"
+            ],
+            "target": "/en"
+          }
+        ],
+        "description": "Full-text English articles from GIGAZINE. Detail pages are cached, and the common `limit` parameter controls how many recent entries are fetched.",
+        "location": "en.ts",
+        "module": "() => import('@/routes/gigazine/en.ts')"
+      }
+    },
+    "apiRoutes": {},
+    "name": "GIGAZINE",
+    "url": "gigazine.net"
+  },
   "gihyo": {
     "routes": {
       "/list/group/:id": {
