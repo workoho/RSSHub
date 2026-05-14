@@ -92715,7 +92715,7 @@ export default {
     "routes": {
       "/plugins": {
         "path": "/plugins",
-        "name": "Obsidian Plugins",
+        "name": "Plugins",
         "maintainers": [
           "DIYgod"
         ],
@@ -92725,6 +92725,19 @@ export default {
         "example": "/obsidian/plugins",
         "location": "plugins.ts",
         "module": () => import('@/routes/obsidian/plugins.ts')
+      },
+      "/themes": {
+        "path": "/themes",
+        "name": "Themes",
+        "maintainers": [
+          "DIYgod"
+        ],
+        "categories": [
+          "program-update"
+        ],
+        "example": "/obsidian/themes",
+        "location": "themes.ts",
+        "module": () => import('@/routes/obsidian/themes.ts')
       },
       "/publish/:id": {
         "path": "/publish/:id",
