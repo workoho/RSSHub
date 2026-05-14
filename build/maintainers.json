@@ -7778,6 +7778,9 @@
   "/sfacg/novel/chapter/:id": [
     "keocheung"
   ],
+  "/shanghaimuseum/display/offline-exhibit/:type?": [
+    "magazian"
+  ],
   "/shcstheatre/programs": [
     "fuzy112"
   ],

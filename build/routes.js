@@ -109037,6 +109037,40 @@ export default {
     "url": "book.sfacg.com",
     "lang": "zh-CN"
   },
+  "shanghaimuseum": {
+    "routes": {
+      "/display/offline-exhibit/:type?": {
+        "path": "/display/offline-exhibit/:type?",
+        "categories": [
+          "travel"
+        ],
+        "example": "/shanghaimuseum/display/offline-exhibit/PRESENT",
+        "parameters": {
+          "type": "Exhibition type, supported values: PRESENT (当期展览) | PAST (往期展览). Default: All exhibitions (both PRESENT and PAST)."
+        },
+        "name": "Special Exhibitions",
+        "maintainers": [
+          "magazian"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.shanghaimuseum.net/mu/frontend/pg/display/offline-exhibit"
+            ],
+            "target": "/display/offline-exhibit"
+          }
+        ],
+        "location": "offline-exhibit.tsx",
+        "module": () => import('@/routes/shanghaimuseum/offline-exhibit.tsx')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Shanghai Museum",
+    "url": "www.shanghaimuseum.net",
+    "zh": {
+      "name": "上海博物馆"
+    }
+  },
   "shcstheatre": {
     "routes": {
       "/programs": {
