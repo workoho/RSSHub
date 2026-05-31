@@ -7935,6 +7935,9 @@
   "/sjtu/tongqu/:type?": [
     "SeanChao"
   ],
+  "/sjtu/cs/xshd": [
+    "BeaCox"
+  ],
   "/sjtu/gs/:type/:num?": [
     "dzx-dzx"
   ],
