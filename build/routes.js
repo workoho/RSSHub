@@ -109263,7 +109263,7 @@ export default {
     "name": "Shanxi Museum",
     "url": "www.shanximuseum.com.cn",
     "zh": {
-      "name": "山西博物馆"
+      "name": "山西博物院"
     }
   },
   "shcstheatre": {
