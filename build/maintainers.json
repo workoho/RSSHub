@@ -7796,6 +7796,9 @@
   "/shanghaimuseum/display/offline-exhibit/:type?": [
     "magazian"
   ],
+  "/shanximuseum/exhibition/temporary/:type?": [
+    "magazian"
+  ],
   "/shcstheatre/programs": [
     "fuzy112"
   ],

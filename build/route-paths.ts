@@ -2537,6 +2537,7 @@ export type RoutePath =
   | `/sfacg/novel/chapter/:id`
   | `/shanghaimuseum/display/offline-exhibit/:type?`
   | `/shanghaimuseum/information/news/:type?`
+  | `/shanximuseum/exhibition/temporary/:type?`
   | `/shcstheatre/programs`
   | `/shiep/:type/:id?`
   | `/shisu/en/:section`
