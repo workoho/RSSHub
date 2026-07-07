@@ -82348,6 +82348,38 @@ export default {
         "location": "addon.ts",
         "module": () => import('@/routes/microsoft/addon.ts')
       },
+      "/message-center": {
+        "path": "/message-center",
+        "name": "Message Center Archive",
+        "url": "mc.merill.net",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/microsoft/message-center",
+        "description": "Microsoft 365 Message Center archive entries from mc.merill.net.",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "mc.merill.net",
+              "mc.merill.net/message/:id"
+            ],
+            "target": "/message-center"
+          }
+        ],
+        "view": 0,
+        "maintainers": [],
+        "location": "message-center.ts",
+        "module": () => import('@/routes/microsoft/message-center.ts')
+      },
       "/mcr/product/*": {
         "path": "/mcr/product/*",
         "categories": [

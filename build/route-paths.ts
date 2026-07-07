@@ -1876,6 +1876,7 @@ export type RoutePath =
   | `/mi/golden`
   | `/microsoft/edge/addon/:crxid`
   | `/microsoft/mcr/product/*`
+  | `/microsoft/message-center`
   | `/microsoftlearn/entra/whats-new`
   | `/microsoftlearn/intune/blog`
   | `/microsoftlearn/intune/in-development`

@@ -32345,6 +32345,20 @@
       }
     ]
   },
+  "merill.net": {
+    "_name": "Microsoft",
+    "mc": [
+      {
+        "title": "Message Center Archive",
+        "docs": "https://docs.rsshub.app/routes/program-update",
+        "source": [
+          "/",
+          "/message/:id"
+        ],
+        "target": "/microsoft/message-center"
+      }
+    ]
+  },
   "mihoyo.com": {
     "_name": "米哈游",
     "sr": [
