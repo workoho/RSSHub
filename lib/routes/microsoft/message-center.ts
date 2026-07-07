@@ -14,9 +14,11 @@ interface MessageCenterMessage {
     };
     Category?: string;
     Details?: MessageCenterDetail[];
+    EndDateTime?: string;
     Id: string;
     LastModifiedDateTime?: string;
     Services?: string[];
+    Severity?: string;
     StartDateTime?: string;
     Tags?: string[];
     Title: string;
@@ -68,6 +70,8 @@ async function handler(ctx) {
         .slice(0, pageSize)
         .map((message): DataItem => {
             const link = `${rootUrl}/message/${message.Id}`;
+            const description = message.Body?.Content || getDetailValue(message, 'Summary') || '';
+            const endDate = message.EndDateTime ? parseDate(message.EndDateTime) : undefined;
             const pubDate = message.StartDateTime ? parseDate(message.StartDateTime) : undefined;
             const updated = message.LastModifiedDateTime ? parseDate(message.LastModifiedDateTime) : undefined;
 
@@ -75,10 +79,11 @@ async function handler(ctx) {
                 title: message.Title,
                 link,
                 guid: message.Id,
-                description: message.Body?.Content || getDetailValue(message, 'Summary') || '',
+                description,
                 pubDate,
                 updated,
                 category: getCategories(message),
+                content: getContent(description, message.Severity, endDate),
             };
         });
 
@@ -99,6 +104,7 @@ function getTimestamp(message: MessageCenterMessage) {
 function getCategories(message: MessageCenterMessage) {
     const categories = [
         message.Category,
+        message.Severity,
         ...(message.Services ?? []),
         ...(message.Tags ?? []),
     ].filter((category): category is string => Boolean(category));
@@ -106,6 +112,38 @@ function getCategories(message: MessageCenterMessage) {
     return categories.length ? [...new Set(categories)] : undefined;
 }
 
+function getContent(description: string, severity?: string, endDate?: Date) {
+    const endDateValue = endDate && !Number.isNaN(endDate.getTime()) ? endDate.toISOString() : undefined;
+    const metadata = [
+        severity ? `Severity: ${severity}` : undefined,
+        endDateValue ? `EndDateTime: ${endDateValue}` : undefined,
+    ].filter((value): value is string => Boolean(value));
+
+    if (!metadata.length) {
+        return {
+            html: description,
+            text: description,
+        };
+    }
+
+    const metadataText = metadata.join('\n');
+    const metadataHtml = metadata.map((value) => `<li>${escapeHtml(value)}</li>`).join('');
+
+    return {
+        html: `<ul>${metadataHtml}</ul>${description}`,
+        text: `${metadataText}\n\n${description}`,
+    };
+}
+
 function getDetailValue(message: MessageCenterMessage, name: string) {
     return message.Details?.find((detail) => detail.Name === name)?.Value;
+}
+
+function escapeHtml(value: string) {
+    return value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
 }
