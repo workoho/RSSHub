@@ -27,6 +27,10 @@ interface MessageCenterMessage {
 const rootUrl = 'https://mc.merill.net';
 const dataUrl = 'https://raw.githubusercontent.com/merill/mc/main/%40data/messages.json';
 const defaultLimit = 20;
+const categoryLabels: Record<string, string> = {
+    planForChange: 'Plan for change',
+    stayInformed: 'Stay informed',
+};
 
 export const route: Route = {
     path: '/message-center',
@@ -72,6 +76,7 @@ async function handler(ctx) {
             const link = `${rootUrl}/message/${message.Id}`;
             const description = message.Body?.Content || getDetailValue(message, 'Summary') || '';
             const endDate = message.EndDateTime ? parseDate(message.EndDateTime) : undefined;
+            const messageCenterCategory = getMessageCenterCategory(message.Category);
             const pubDate = message.StartDateTime ? parseDate(message.StartDateTime) : undefined;
             const updated = message.LastModifiedDateTime ? parseDate(message.LastModifiedDateTime) : undefined;
 
@@ -82,8 +87,9 @@ async function handler(ctx) {
                 description,
                 pubDate,
                 updated,
-                category: getCategories(message),
-                content: getContent(description, message.Severity, endDate),
+                category: getCategories(message, messageCenterCategory),
+                content: getContent(description, messageCenterCategory, message.Severity, endDate),
+                _extra: messageCenterCategory ? { messageCenterCategory } : undefined,
             };
         });
 
@@ -101,9 +107,9 @@ function getTimestamp(message: MessageCenterMessage) {
     return date ? Date.parse(date) || 0 : 0;
 }
 
-function getCategories(message: MessageCenterMessage) {
+function getCategories(message: MessageCenterMessage, messageCenterCategory?: string) {
     const categories = [
-        message.Category,
+        messageCenterCategory,
         message.Severity,
         ...(message.Services ?? []),
         ...(message.Tags ?? []),
@@ -112,9 +118,10 @@ function getCategories(message: MessageCenterMessage) {
     return categories.length ? [...new Set(categories)] : undefined;
 }
 
-function getContent(description: string, severity?: string, endDate?: Date) {
+function getContent(description: string, messageCenterCategory?: string, severity?: string, endDate?: Date) {
     const endDateValue = endDate && !Number.isNaN(endDate.getTime()) ? endDate.toISOString() : undefined;
     const metadata = [
+        messageCenterCategory ? `MessageCenterCategory: ${messageCenterCategory}` : undefined,
         severity ? `Severity: ${severity}` : undefined,
         endDateValue ? `EndDateTime: ${endDateValue}` : undefined,
     ].filter((value): value is string => Boolean(value));
@@ -137,6 +144,10 @@ function getContent(description: string, severity?: string, endDate?: Date) {
 
 function getDetailValue(message: MessageCenterMessage, name: string) {
     return message.Details?.find((detail) => detail.Name === name)?.Value;
+}
+
+function getMessageCenterCategory(category?: string) {
+    return category ? categoryLabels[category] ?? category : undefined;
 }
 
 function escapeHtml(value: string) {
