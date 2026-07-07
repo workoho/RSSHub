@@ -1,6 +1,6 @@
 import type { DataItem, Route } from '@/types';
 import { ViewType } from '@/types';
-import ofetch from '@/utils/ofetch';
+import got from '@/utils/got';
 import { parseDate } from '@/utils/parse-date';
 
 interface MessageCenterDetail {
@@ -56,10 +56,15 @@ export const route: Route = {
 async function handler(ctx) {
     const limit = Number.parseInt(ctx.req.query('limit') ?? String(defaultLimit), 10);
     const pageSize = Number.isNaN(limit) || limit <= 0 ? defaultLimit : limit;
-    const messages = await ofetch<MessageCenterMessage[]>(dataUrl);
+    const { data: messages }: { data: MessageCenterMessage[] } = await got(dataUrl);
+
+    if (!Array.isArray(messages)) {
+        throw new Error('Failed to fetch Microsoft 365 Message Center archive data.');
+    }
 
     const item = messages
-        .toSorted((a, b) => getTimestamp(b) - getTimestamp(a))
+        .slice()
+        .sort((a, b) => getTimestamp(b) - getTimestamp(a))
         .slice(0, pageSize)
         .map((message): DataItem => {
             const link = `${rootUrl}/message/${message.Id}`;
