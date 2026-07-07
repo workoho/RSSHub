@@ -5716,10 +5716,10 @@
     "hoilc",
     "DIYgod"
   ],
-  "/microsoft/message-center": [],
   "/microsoft/mcr/product/*": [
     "margani"
   ],
+  "/microsoft/message-center": [],
   "/microsoftlearn/intune/blog": [],
   "/microsoftlearn/entra/whats-new": [
     "dein-github-name"

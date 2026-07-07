@@ -82348,6 +82348,37 @@ export default {
         "location": "addon.ts",
         "module": () => import('@/routes/microsoft/addon.ts')
       },
+      "/mcr/product/*": {
+        "path": "/mcr/product/*",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/microsoft/mcr/product/dotnet/framework/runtime",
+        "parameters": {
+          "product": "repository path in mcr.microsoft.com"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "https://mcr.microsoft.com/en-us/product/:product/tags"
+            ]
+          }
+        ],
+        "name": "Product tags in mcr.microsoft.com",
+        "maintainers": [
+          "margani"
+        ],
+        "location": "mcr.ts",
+        "module": () => import('@/routes/microsoft/mcr.ts')
+      },
       "/message-center": {
         "path": "/message-center",
         "name": "Message Center Archive",
@@ -82379,37 +82410,6 @@ export default {
         "maintainers": [],
         "location": "message-center.ts",
         "module": () => import('@/routes/microsoft/message-center.ts')
-      },
-      "/mcr/product/*": {
-        "path": "/mcr/product/*",
-        "categories": [
-          "program-update"
-        ],
-        "example": "/microsoft/mcr/product/dotnet/framework/runtime",
-        "parameters": {
-          "product": "repository path in mcr.microsoft.com"
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "https://mcr.microsoft.com/en-us/product/:product/tags"
-            ]
-          }
-        ],
-        "name": "Product tags in mcr.microsoft.com",
-        "maintainers": [
-          "margani"
-        ],
-        "location": "mcr.ts",
-        "module": () => import('@/routes/microsoft/mcr.ts')
       }
     },
     "apiRoutes": {},
