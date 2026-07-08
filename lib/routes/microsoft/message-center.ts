@@ -91,7 +91,7 @@ async function handler(ctx) {
                 updated,
                 category: getCategories(message, messageCenterCategory),
                 content: getContent(description, messageCenterCategory, message.Severity, endDate),
-                _extra: messageCenterCategory ? { messageCenterCategory } : undefined,
+                _extra: getExtra(messageCenterCategory, message.Severity),
             };
         });
 
@@ -150,6 +150,20 @@ function getDetailValue(message: MessageCenterMessage, name: string) {
 
 function getMessageCenterCategory(category?: string) {
     return category ? categoryLabels[category] ?? category : undefined;
+}
+
+function getExtra(messageCenterCategory?: string, severity?: string) {
+    const extra: Record<string, string> = {};
+
+    if (messageCenterCategory) {
+        extra.messageCenterCategory = messageCenterCategory;
+    }
+
+    if (severity) {
+        extra.severity = severity;
+    }
+
+    return Object.keys(extra).length ? extra : undefined;
 }
 
 function isMessageCenterMessage(message: MessageCenterMessage) {
