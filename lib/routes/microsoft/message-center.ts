@@ -19,6 +19,7 @@ interface MessageCenterMessage {
     LastModifiedDateTime?: string;
     Services?: string[];
     Severity?: string;
+    Source?: string;
     StartDateTime?: string;
     Tags?: string[];
     Title: string;
@@ -69,6 +70,7 @@ async function handler(ctx) {
     }
 
     const item = messages
+        .filter(isMessageCenterMessage)
         .slice()
         .sort((a, b) => getTimestamp(b) - getTimestamp(a))
         .slice(0, pageSize)
@@ -148,6 +150,10 @@ function getDetailValue(message: MessageCenterMessage, name: string) {
 
 function getMessageCenterCategory(category?: string) {
     return category ? categoryLabels[category] ?? category : undefined;
+}
+
+function isMessageCenterMessage(message: MessageCenterMessage) {
+    return message.Source === 'messageCenter';
 }
 
 function escapeHtml(value: string) {
