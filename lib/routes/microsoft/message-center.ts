@@ -1,3 +1,5 @@
+import { load } from 'cheerio';
+
 import type { DataItem, Route } from '@/types';
 import { ViewType } from '@/types';
 import got from '@/utils/got';
@@ -23,6 +25,11 @@ interface MessageCenterMessage {
     StartDateTime?: string;
     Tags?: string[];
     Title: string;
+}
+
+interface MessageCenterImage {
+    alt?: string;
+    url: string;
 }
 
 const rootUrl = 'https://mc.merill.net';
@@ -78,6 +85,7 @@ async function handler(ctx) {
             const link = `${rootUrl}/message/${message.Id}`;
             const description = message.Body?.Content || getDetailValue(message, 'Summary') || '';
             const endDate = message.EndDateTime ? parseDate(message.EndDateTime) : undefined;
+            const images = getImages(description);
             const messageCenterCategory = getMessageCenterCategory(message.Category);
             const pubDate = message.StartDateTime ? parseDate(message.StartDateTime) : undefined;
             const updated = message.LastModifiedDateTime ? parseDate(message.LastModifiedDateTime) : undefined;
@@ -89,9 +97,11 @@ async function handler(ctx) {
                 description,
                 pubDate,
                 updated,
+                image: images[0]?.url,
+                attachments: getImageAttachments(images),
                 category: getCategories(message, messageCenterCategory),
                 content: getContent(description, messageCenterCategory, message.Severity, endDate),
-                _extra: getExtra(messageCenterCategory, message.Severity),
+                _extra: getExtra(messageCenterCategory, message.Severity, images),
             };
         });
 
@@ -152,8 +162,79 @@ function getMessageCenterCategory(category?: string) {
     return category ? categoryLabels[category] ?? category : undefined;
 }
 
-function getExtra(messageCenterCategory?: string, severity?: string) {
-    const extra: Record<string, string> = {};
+function getImages(description: string) {
+    const $ = load(description);
+    const images: MessageCenterImage[] = [];
+    const imageUrls = new Set<string>();
+
+    $('img').each((_, htmlImage) => {
+        const src = $(htmlImage).attr('src');
+        const url = src ? getAbsoluteUrl(src) : undefined;
+
+        if (!url || imageUrls.has(url)) {
+            return;
+        }
+
+        imageUrls.add(url);
+        images.push({
+            alt: $(htmlImage).attr('alt') || undefined,
+            url,
+        });
+    });
+
+    return images;
+}
+
+function getImageAttachments(images: MessageCenterImage[]) {
+    return images.length
+        ? images.map((image) => ({
+              url: image.url,
+              mime_type: getImageMimeType(image.url),
+              title: image.alt,
+          }))
+        : undefined;
+}
+
+function getImageMimeType(url: string) {
+    const pathname = getPathname(url);
+
+    if (pathname.endsWith('.jpg') || pathname.endsWith('.jpeg')) {
+        return 'image/jpeg';
+    }
+
+    if (pathname.endsWith('.gif')) {
+        return 'image/gif';
+    }
+
+    if (pathname.endsWith('.webp')) {
+        return 'image/webp';
+    }
+
+    if (pathname.endsWith('.svg')) {
+        return 'image/svg+xml';
+    }
+
+    return 'image/png';
+}
+
+function getPathname(url: string) {
+    try {
+        return new URL(url).pathname.toLowerCase();
+    } catch {
+        return url.toLowerCase();
+    }
+}
+
+function getAbsoluteUrl(url: string) {
+    try {
+        return new URL(url, rootUrl).href;
+    } catch {
+        return undefined;
+    }
+}
+
+function getExtra(messageCenterCategory?: string, severity?: string, images: MessageCenterImage[] = []) {
+    const extra: Record<string, MessageCenterImage[] | string> = {};
 
     if (messageCenterCategory) {
         extra.messageCenterCategory = messageCenterCategory;
@@ -161,6 +242,10 @@ function getExtra(messageCenterCategory?: string, severity?: string) {
 
     if (severity) {
         extra.severity = severity;
+    }
+
+    if (images.length) {
+        extra.images = images;
     }
 
     return Object.keys(extra).length ? extra : undefined;
