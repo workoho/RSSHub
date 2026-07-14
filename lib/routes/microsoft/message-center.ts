@@ -252,7 +252,11 @@ function getExtra(messageCenterCategory?: string, severity?: string, images: Mes
 }
 
 function isMessageCenterMessage(message: MessageCenterMessage) {
-    return message.Source === 'messageCenter';
+    return message.Source === 'messageCenter' && !isRoadmapTitle(message.Title);
+}
+
+function isRoadmapTitle(title: string) {
+    return title.toLowerCase().includes('roadmap');
 }
 
 function escapeHtml(value: string) {
