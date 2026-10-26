@@ -11,6 +11,11 @@ on:
             - 'Dockerfile'
     workflow_dispatch: {}
 
+# Queue builds per ref so an older build cannot push latest after a newer one
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
