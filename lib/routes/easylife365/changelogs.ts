@@ -20,21 +20,21 @@ function cleanDescription(text: string) {
         .trim();
 }
 
+const productNames = new Map([
+    ['collab', 'Collaboration'],
+    ['identity', 'Identity'],
+    ['mail', 'Mail'],
+    ['meet', 'Meet'],
+    ['tipster', 'Tipster'],
+]);
+
 function getProductFromLink(link: string) {
     const match = link.match(/\/changelogs\/\d{4}\/\d{2}\/\d{2}\/([^/]+)\//);
     if (!match) {
         return '';
     }
 
-    const productMap: Record<string, string> = {
-        collab: 'Collaboration',
-        identity: 'Identity',
-        mail: 'Mail',
-        meet: 'Meet',
-        tipster: 'Tipster',
-    };
-
-    return productMap[match[1]] ?? match[1];
+    return productNames.get(match[1]) ?? match[1];
 }
 
 export const route = {

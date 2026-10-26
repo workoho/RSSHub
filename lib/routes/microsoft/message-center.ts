@@ -35,10 +35,10 @@ interface MessageCenterImage {
 const rootUrl = 'https://mc.merill.net';
 const dataUrl = 'https://raw.githubusercontent.com/merill/mc/main/%40data/messages.json';
 const defaultLimit = 20;
-const categoryLabels: Record<string, string> = {
-    planForChange: 'Plan for change',
-    stayInformed: 'Stay informed',
-};
+const categoryLabels = new Map([
+    ['planForChange', 'Plan for change'],
+    ['stayInformed', 'Stay informed'],
+]);
 
 export const route: Route = {
     path: '/message-center',
@@ -151,7 +151,7 @@ function getDetailValue(message: MessageCenterMessage, name: string) {
 }
 
 function getMessageCenterCategory(category?: string) {
-    return category ? (categoryLabels[category] ?? category) : undefined;
+    return category ? (categoryLabels.get(category) ?? category) : undefined;
 }
 
 function getImages(description: string) {
