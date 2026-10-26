@@ -35,18 +35,14 @@ const processCatalog = ({ data, board, viewOptions }: { data: CatalogApiReturn; 
                 return false;
             }
 
-            if (viewOptions.maxReplies !== undefined && replies > viewOptions.maxReplies) {
-                return false;
-            }
-
-            return true;
+            return viewOptions.maxReplies === undefined || replies <= viewOptions.maxReplies;
         })
         .map((thread) => ({
             author: `${thread.name} ${thread.trip ?? thread.no}`,
             description: renderToString(renderPost({ post: thread, board, viewOptions })),
             link: `https://boards.4chan.org/${board}/thread/${thread.no}`,
             pubDate: parseDate(thread.time * 1000),
-            title: thread.sub ?? sanitizeHtml(thread.com?.split('<br>')[0] ?? '', { allowedTags: [] }),
+            title: thread.sub ?? sanitizeHtml(thread.com?.split('<br>', 1)[0] ?? '', { allowedTags: [] }),
         }));
 };
 
@@ -85,7 +81,7 @@ const renderPost = ({ post, board, viewOptions }: { post: ChanPost; board: strin
     );
     const renderedPost = (
         <>
-            {post.last_replies && viewOptions.includeReplyCount && (
+            {post.replies !== undefined && viewOptions.includeReplyCount && (
                 <>
                     <small>{post.replies} 💬</small>
                     <br />
@@ -144,5 +140,5 @@ interface ChanPost {
     last_replies?: ChanPost[];
 }
 
-export type { CatalogApiReturn, ChanPost, ViewOptions };
-export { parseParams, processCatalog, renderPost };
+export type { CatalogApiReturn };
+export { parseParams, processCatalog };
