@@ -8,8 +8,9 @@ services:
             NODE_ENV: production
             CACHE_TYPE: redis
             REDIS_URL: 'redis://redis:6379/'
-            PUPPETEER_WS_ENDPOINT: 'ws://browserless:3000'
-            PUPPETEER_REAL_BROWSER_SERVICE: 'http://real-browser:3000'
+            # Endpoint format from upstream's docker-compose.yml (PLAYWRIGHT_CDP_ENDPOINT, read by lib/utils/playwright.ts). Needs the synced code from workoho/RSSHub#78.
+            # UNVERIFIED: ${BROWSERLESS_TOKEN:?} replaces upstream's default value; Coolify's handling of :? is from its docs, not a run.
+            PLAYWRIGHT_CDP_ENDPOINT: 'ws://browserless:3000?token=${BROWSERLESS_TOKEN:?}'
         healthcheck:
             test: ['CMD', 'curl', '-f', 'http://localhost:1200/healthz']
             interval: 30s
@@ -24,26 +25,18 @@ services:
             - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=${RSSHUB_BASIC_AUTH:?}
             - traefik.http.routers.http-0-hyprrykhpm87vx88mwnlwrkt-rsshub.middlewares=hyprrykhpm87vx88mwnlwrkt-rsshub
 
-    real-browser:
-        image: ghcr.io/hyoban/puppeteer-real-browser-hono
-        restart: always
-        expose:
-            - '3000'
-        healthcheck:
-            test: ['CMD', 'curl', '-f', 'http://localhost:3000']
-            interval: 30s
-            timeout: 10s
-            retries: 3
-
     browserless:
-        image: browserless/chrome
+        # UNVERIFIED: the v2.57.3 tag exists on GHCR (checked via the registry API); no run on this image yet. Upstream leaves the tag unpinned.
+        image: ghcr.io/browserless/chromium:v2.57.3
         restart: always
+        environment:
+            TOKEN: '${BROWSERLESS_TOKEN:?}'
         ulimits:
             core:
                 hard: 0
                 soft: 0
         healthcheck:
-            test: ['CMD', 'curl', '-f', 'http://localhost:3000/pressure']
+            test: ['CMD-SHELL', 'curl -f "http://localhost:3000/pressure?token=$$TOKEN"']
             interval: 30s
             timeout: 10s
             retries: 3
