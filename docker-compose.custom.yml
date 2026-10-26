@@ -2,8 +2,8 @@ services:
     rsshub:
         image: ghcr.io/workoho/rsshub:latest
         restart: always
-        ports:
-            - '1200:1200'
+        expose:
+            - '1200'
         environment:
             NODE_ENV: production
             CACHE_TYPE: redis
@@ -19,14 +19,16 @@ services:
             - redis
             - browserless
         labels:
-            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=cherish-unplug-lemonis:$2y$05$EQ5wBJPsNbhoEN49yjCkNu6WiQ6OXDrcGClbh4.7Q1ou92SNpq3b2
+            # RSSHUB_BASIC_AUTH is set in Coolify as user:bcrypt-hash (htpasswd -nbB); a deploy is blocked while it is empty.
+            # Unverified: if the right password gets 401, Compose may have expanded the $ signs; enter the hash with every $ doubled.
+            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=${RSSHUB_BASIC_AUTH:?}
             - traefik.http.routers.http-0-hyprrykhpm87vx88mwnlwrkt-rsshub.middlewares=hyprrykhpm87vx88mwnlwrkt-rsshub
 
     real-browser:
         image: ghcr.io/hyoban/puppeteer-real-browser-hono
         restart: always
-        ports:
-            - '3001:3000'
+        expose:
+            - '3000'
         healthcheck:
             test: ['CMD', 'curl', '-f', 'http://localhost:3000']
             interval: 30s
