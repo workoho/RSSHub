@@ -64,8 +64,15 @@ jobs:
               # UNVERIFIED (Coolify API docs): GET /api/v1/deploy?uuid=<uuid>&force=true
               # needs "Authorization: Bearer <token>" with deploy permission.
               # -G appends force=true after "?" or "&", whichever the URL needs.
+              env:
+                  COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
+                  COOLIFY_WEBHOOK_URL: ${{ secrets.COOLIFY_WEBHOOK_URL }}
               run: |
+                  if [ -z "$COOLIFY_API_TOKEN" ]; then
+                    echo "::error::Secret COOLIFY_API_TOKEN is not set: create a Coolify API token with deploy permission and add it as an Actions secret."
+                    exit 1
+                  fi
                   curl --silent --fail --show-error -G \
-                    -H "Authorization: Bearer ${{ secrets.COOLIFY_API_TOKEN }}" \
+                    -H "Authorization: Bearer $COOLIFY_API_TOKEN" \
                     --data-urlencode force=true \
-                    "${{ secrets.COOLIFY_WEBHOOK_URL }}"
+                    "$COOLIFY_WEBHOOK_URL"
