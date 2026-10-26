@@ -49,7 +49,7 @@ export const route: Route = {
             while (next.length) {
                 const nextTag = next.get(0)?.tagName?.toLowerCase();
 
-                if (nextTag && ['h2', 'h3', 'h4'].includes(nextTag)) {
+                if (/^h[234]$/.test(nextTag ?? '')) {
                     break;
                 }
 

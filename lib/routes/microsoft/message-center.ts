@@ -68,7 +68,7 @@ export const route: Route = {
 };
 
 async function handler(ctx) {
-    const limit = Math.trunc(Number(ctx.req.query('limit') ?? defaultLimit));
+    const limit = Number(ctx.req.query('limit') ?? defaultLimit);
     const pageSize = Number.isNaN(limit) || limit <= 0 ? defaultLimit : limit;
     const { data: messages }: { data: MessageCenterMessage[] } = await got(dataUrl);
 
