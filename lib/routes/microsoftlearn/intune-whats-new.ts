@@ -38,12 +38,8 @@ export const route: Route = {
                 return;
             }
 
-            if (tagName !== 'h4') {
-                return;
-            }
-
             // Only process feature items within a dated week
-            if (!currentWeek) {
+            if (tagName !== 'h4' || !currentWeek) {
                 return;
             }
 
@@ -53,7 +49,7 @@ export const route: Route = {
             while (next.length) {
                 const nextTag = next.get(0)?.tagName?.toLowerCase();
 
-                if (nextTag === 'h2' || nextTag === 'h3' || nextTag === 'h4') {
+                if (nextTag && ['h2', 'h3', 'h4'].includes(nextTag)) {
                     break;
                 }
 

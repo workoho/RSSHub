@@ -68,18 +68,17 @@ export const route: Route = {
 };
 
 async function handler(ctx) {
-    const limit = Number.parseInt(ctx.req.query('limit') ?? String(defaultLimit), 10);
+    const limit = Math.trunc(Number(ctx.req.query('limit') ?? defaultLimit));
     const pageSize = Number.isNaN(limit) || limit <= 0 ? defaultLimit : limit;
     const { data: messages }: { data: MessageCenterMessage[] } = await got(dataUrl);
 
     if (!Array.isArray(messages)) {
-        throw new Error('Failed to fetch Microsoft 365 Message Center archive data.');
+        throw new TypeError('Failed to fetch Microsoft 365 Message Center archive data.');
     }
 
     const item = messages
-        .filter(isMessageCenterMessage)
-        .slice()
-        .sort((a, b) => getTimestamp(b) - getTimestamp(a))
+        .filter((message) => isMessageCenterMessage(message))
+        .toSorted((a, b) => getTimestamp(b) - getTimestamp(a))
         .slice(0, pageSize)
         .map((message): DataItem => {
             const link = `${rootUrl}/message/${message.Id}`;
@@ -120,23 +119,16 @@ function getTimestamp(message: MessageCenterMessage) {
 }
 
 function getCategories(message: MessageCenterMessage, messageCenterCategory?: string) {
-    const categories = [
-        messageCenterCategory,
-        message.Severity,
-        ...(message.Services ?? []),
-        ...(message.Tags ?? []),
-    ].filter((category): category is string => Boolean(category));
+    const categories = [messageCenterCategory, message.Severity, ...(message.Services ?? []), ...(message.Tags ?? [])].filter((category): category is string => Boolean(category));
 
     return categories.length ? [...new Set(categories)] : undefined;
 }
 
 function getContent(description: string, messageCenterCategory?: string, severity?: string, endDate?: Date) {
     const endDateValue = endDate && !Number.isNaN(endDate.getTime()) ? endDate.toISOString() : undefined;
-    const metadata = [
-        messageCenterCategory ? `MessageCenterCategory: ${messageCenterCategory}` : undefined,
-        severity ? `Severity: ${severity}` : undefined,
-        endDateValue ? `EndDateTime: ${endDateValue}` : undefined,
-    ].filter((value): value is string => Boolean(value));
+    const metadata = [messageCenterCategory ? `MessageCenterCategory: ${messageCenterCategory}` : undefined, severity ? `Severity: ${severity}` : undefined, endDateValue ? `EndDateTime: ${endDateValue}` : undefined].filter(
+        (value): value is string => Boolean(value)
+    );
 
     if (!metadata.length) {
         return {
@@ -159,7 +151,7 @@ function getDetailValue(message: MessageCenterMessage, name: string) {
 }
 
 function getMessageCenterCategory(category?: string) {
-    return category ? categoryLabels[category] ?? category : undefined;
+    return category ? (categoryLabels[category] ?? category) : undefined;
 }
 
 function getImages(description: string) {
@@ -229,7 +221,7 @@ function getAbsoluteUrl(url: string) {
     try {
         return new URL(url, rootUrl).href;
     } catch {
-        return undefined;
+        return;
     }
 }
 
@@ -260,10 +252,5 @@ function isRoadmapTitle(title: string) {
 }
 
 function escapeHtml(value: string) {
-    return value
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
+    return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 }

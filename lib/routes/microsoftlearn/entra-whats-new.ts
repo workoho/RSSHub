@@ -31,7 +31,7 @@ export const route = {
 
             if (tagName === 'h2') {
                 // Extract only "Month YYYY" from the heading text, ignoring any trailing anchor link characters
-                const match = text.match(/([A-Za-z]+ \d{4})/);
+                const match = text.match(/([A-Z]+ \d{4})/i);
                 currentMonth = match ? match[1] : '';
                 return;
             }
