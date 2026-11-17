@@ -19,10 +19,14 @@ services:
             - redis
             - browserless
         labels:
-            # RSSHUB_BASIC_AUTH is set in Coolify as user:bcrypt-hash (htpasswd -nbB); a deploy is blocked while it is empty.
-            # Unverified: if the right password gets 401, Compose may have expanded the $ signs; enter the hash with every $ doubled.
-            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.users=${RSSHUB_BASIC_AUTH:?}
+            # Basic Auth reads its users from an htpasswd file on the server, not from a label value:
+            # Coolify does not interpolate variables in labels, so a ${...} reference reaches Traefik literally.
+            # The file is /data/coolify/proxy/rsshub.htpasswd on the server, mounted into the Coolify proxy as /traefik.
+            # Create or update it with: htpasswd -nbB -C 12 <user> <password>
+            - traefik.http.middlewares.hyprrykhpm87vx88mwnlwrkt-rsshub.basicauth.usersfile=/traefik/rsshub.htpasswd
+            # Coolify generates an http-0 and, for an https domain, an https-0 router; both get the middleware.
             - traefik.http.routers.http-0-hyprrykhpm87vx88mwnlwrkt-rsshub.middlewares=hyprrykhpm87vx88mwnlwrkt-rsshub
+            - traefik.http.routers.https-0-hyprrykhpm87vx88mwnlwrkt-rsshub.middlewares=hyprrykhpm87vx88mwnlwrkt-rsshub
 
     real-browser:
         image: ghcr.io/hyoban/puppeteer-real-browser-hono
