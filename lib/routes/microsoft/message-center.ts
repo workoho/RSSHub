@@ -68,7 +68,9 @@ export const route: Route = {
 };
 
 async function handler(ctx) {
-    const limit = Math.trunc(Number(ctx.req.query('limit') ?? defaultLimit));
+    // parseInt keeps the old parsing of values such as '10abc', 'Infinity' and '1e2'
+    // oxlint-disable-next-line unicorn/prefer-number-coercion
+    const limit = Number.parseInt(ctx.req.query('limit') ?? String(defaultLimit), 10);
     const pageSize = Number.isNaN(limit) || limit <= 0 ? defaultLimit : limit;
     const { data: messages }: { data: MessageCenterMessage[] } = await got(dataUrl);
 
