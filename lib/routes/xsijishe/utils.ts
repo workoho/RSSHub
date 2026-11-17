@@ -1,48 +1,24 @@
-import type { Browser } from '@/utils/playwright';
-import { setCookies } from '@/utils/playwright-utils';
+import { FetchError } from 'ofetch';
 
-interface PlaywrightGetOptions {
-    cookie?: string;
-    timeout?: number;
-    userAgent?: string;
+export const baseUrl = 'https://xsijishe.com';
+
+// Cloudflare challenges non-browser clients with 403 or 429, and answers requests from Cloudflare Workers with 520.
+const blockedStatuses = new Set([403, 429, 520]);
+
+export function isBlockedRequest(error: unknown) {
+    return error instanceof FetchError && error.status !== undefined && blockedStatuses.has(error.status);
 }
 
-const playwrightGet = async (url: string, browser: Browser, waitForSelector = '.t_f', options: PlaywrightGetOptions = {}) => {
-    const page = await browser.newPage();
-    const expectResourceTypes = new Set(['document', 'script']);
-    try {
-        if (options.userAgent) {
-            await page.setUserAgent(options.userAgent);
-        }
+// What a browser page needs to pass the Cloudflare challenge and render; images and media are skipped.
+export const browserResourceTypes = new Set(['document', 'script', 'xhr', 'fetch', 'stylesheet']);
 
-        if (options.cookie) {
-            await setCookies(page, options.cookie, 'xsijishe.com');
-        }
-
-        await page.setRequestInterception(true);
-        page.on('request', (request) => {
-            expectResourceTypes.has(request.resourceType()) ? request.continue() : request.abort();
+export function toBrowserCookies(cookie: string) {
+    return cookie
+        .split(';')
+        .map((entry) => entry.trim())
+        .filter((entry) => entry.indexOf('=') > 0)
+        .map((entry) => {
+            const separator = entry.indexOf('=');
+            return { name: entry.slice(0, separator), value: entry.slice(separator + 1), url: `${baseUrl}/` };
         });
-        await page.goto(url, {
-            waitUntil: 'domcontentloaded',
-        });
-
-        let html = await page.evaluate(() => document.documentElement.innerHTML);
-        if (html.includes('抱歉，您尚未登录，没有权限访问该版块')) {
-            return html;
-        }
-
-        try {
-            await page.waitForSelector(waitForSelector, { timeout: options.timeout ?? 10000 });
-        } catch {
-            // Return the loaded HTML even when the expected selector is missing.
-        }
-
-        html = await page.evaluate(() => document.documentElement.innerHTML);
-        return html;
-    } finally {
-        await page.close();
-    }
-};
-
-export { playwrightGet };
+}

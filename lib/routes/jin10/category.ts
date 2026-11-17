@@ -161,7 +161,7 @@ export const route: Route = {
             target: '',
         },
     ],
-    name: '外汇',
+    name: '分类快讯',
     maintainers: ['laampui'],
     handler,
     url: 'jin10.com/',
@@ -170,7 +170,7 @@ export const route: Route = {
 async function handler(ctx) {
     const id = ctx.req.param('id');
     const data = await cache.tryGet(
-        'jin10:aa:${category}',
+        `jin10:category:${id}`,
         async () => {
             const { data: response } = await got('https://4a735ea38f8146198dc205d2e2d1bd28.z3c.jin10.com/flash', {
                 headers: {
@@ -183,7 +183,7 @@ async function handler(ctx) {
                     classify: `[${id}]`,
                 },
             });
-            return response.data.filter((item) => item.type !== 1);
+            return response.data.filter((item) => item.type !== 1 && (item.data.content || item.data.vip_title));
         },
         config.cache.routeExpire,
         false

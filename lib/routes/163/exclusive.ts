@@ -134,7 +134,7 @@ async function handler(ctx) {
         title: item.title,
         author: item.source,
         link: item.skipURL || item.url || `${rootUrl}/dy/article/${item.docid}.html`,
-        pubDate: timezone(parseDate(item.ptime), +8),
+        pubDate: timezone(parseDate(item.ptime), 8),
         videoId: item.skipType === 'video' ? item.stitle : '',
     }));
 
@@ -145,7 +145,7 @@ async function handler(ctx) {
                     if (item.videoId) {
                         const detailResponse = await got({
                             method: 'get',
-                            url: `${rootUrl}/touch/video/detail/jsonp/VIA8K0PTB.html?callback=videoList`,
+                            url: `${rootUrl}/touch/video/detail/jsonp/${item.videoId}.html?callback=videoList`,
                         });
 
                         const video = JSON.parse(detailResponse.data.match(/^videoList\((.*)\)$/)[1])?.mp4_url;
