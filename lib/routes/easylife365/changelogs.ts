@@ -56,7 +56,7 @@ export const route = {
                     .toArray()
                     .map((el) => $(el).attr('href'))
                     .filter((href): href is string => typeof href === 'string' && href.length > 0)
-                    .map((href) => new URL(href, rootUrl).toString())
+                    .map((href) => new URL(href, rootUrl).href)
             ),
         ];
 
